@@ -16,7 +16,9 @@ cleanup() {
 }
 trap cleanup EXIT
 
-rm -r "$app_bundle"
+if [ -e "$app_bundle" ]; then
+    rm -r "$app_bundle"
+fi
 mkdir -p \
     "$app_bundle/Contents/MacOS" \
     "$app_bundle/Contents/Resources" \

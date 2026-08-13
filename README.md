@@ -18,28 +18,91 @@ MacEase 是一款原生 macOS 小工具，目标是补齐日常使用中那些�
 ## 系统要求
 
 - macOS 13 Ventura 或更高版本
-- Xcode 15 或更高版本（从源码构建）
+- Apple Silicon Mac（当前命令行构建脚本生成 `arm64` 应用）
+- 完整 Xcode 15 或更高版本；仅在本机调试时也可使用 Xcode Command Line Tools
+- [XcodeGen](https://github.com/yonaskolb/XcodeGen)，用于生成 Xcode 工程和执行完整验证
 
-## 本地运行
+## 编译与安装
 
-1. 安装完整 Xcode，并在终端确认 `xcode-select -p` 指向 Xcode：
+### 方式一：使用完整 Xcode（推荐）
+
+1. 从 App Store 安装 Xcode，并让命令行工具指向完整 Xcode：
 
    ```bash
    sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+   xcodebuild -version
    ```
 
-2. 打开 `MacEase.xcodeproj`，选择 `MacEase` scheme 后运行。
-3. 点击菜单栏中的 MacEase 图标，选择“启用 Finder 扩展…”。
-4. 在系统设置中启用“MacEase Finder 扩展”。
-5. 从 MacEase 菜单栏图标中允许“Finder 原地命名”的辅助功能权限。
-6. 打开 Finder，在空白处、文件或文件夹上右键使用。
+2. 安装 XcodeGen、获取源码并生成工程：
 
-如果修改了 `project.yml`，可使用 [XcodeGen](https://github.com/yonaskolb/XcodeGen) 重新生成工程：
+   ```bash
+   brew install xcodegen
+   git clone https://github.com/lkpsg/MacEase.git
+   cd MacEase
+   xcodegen generate
+   open MacEase.xcodeproj
+   ```
+
+3. 在 Xcode 中依次选择 `MacEase` 主应用和 `MacEaseFinderExtension` 扩展，在 **Signing & Capabilities** 中选择自己的 Apple Developer Team。若 Bundle Identifier 与现有应用冲突，请同时修改 `project.yml` 中主应用和扩展的标识符，再执行一次 `xcodegen generate`。
+4. 选择 `MacEase` scheme 和 `My Mac`，使用 **Product > Run** 编译并运行。需要长期安装时，在 Xcode 的 Products 中找到 `MacEase.app`，复制到 `/Applications`。
+
+### 方式二：使用命令行脚本（本机 Debug）
+
+这套流程使用临时签名，适合在当前 Mac 上开发和调试，不适合分发给其他用户。首次准备环境：
 
 ```bash
+xcode-select --install
 brew install xcodegen
-xcodegen generate
+git clone https://github.com/lkpsg/MacEase.git
+cd MacEase
 ```
+
+执行完整检查、编译并安装：
+
+```bash
+./scripts/verify.sh
+./scripts/install-debug-app.sh
+```
+
+安装脚本会完成以下操作：
+
+- 编译到仓库同级的 `outputs/MacEase-Debug.app`
+- 验证主应用和 Finder 扩展的代码签名
+- 安装为 `/Applications/MacEase.app`
+- 注册并启用 Finder 扩展，然后重启 Finder、启动 MacEase
+- 若 `/Applications/MacEase.app` 已存在，先备份到仓库的 `work/` 目录，不直接删除旧版
+
+只编译、不安装时运行：
+
+```bash
+./scripts/build-debug-app.sh "$PWD/build"
+open "$PWD/build/MacEase-Debug.app"
+```
+
+如需使用自定义输出目录，可把目录作为安装脚本的第一个参数：
+
+```bash
+./scripts/install-debug-app.sh "$PWD/build"
+```
+
+## 首次启动设置
+
+1. 在菜单栏中点击 MacEase 图标，确认 Finder 扩展状态；如果系统尚未启用，选择“启用 Finder 扩展…”，在系统设置中打开 `MacEase Finder 扩展`。
+2. 从菜单栏选择“允许 Finder 原地命名…”，按系统提示为 MacEase 授予辅助功能权限。未授权时仍会创建并选中项目，但无法自动进入改名状态。
+3. 打开 Finder，在窗口空白处、文件或文件夹上右键，使用“新建文件”或“新建文件夹”。
+
+### 卸载
+
+退出 MacEase 后执行：
+
+```bash
+pkill -x MacEase || true
+pluginkit -e ignore -i com.lkpsg.MacEase.FinderExtension
+osascript -e 'tell application "Finder" to delete POSIX file "/Applications/MacEase.app"'
+killall Finder
+```
+
+应用会被移入废纸篓，需要时可以恢复。
 
 ## 测试
 
