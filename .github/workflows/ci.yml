@@ -8,7 +8,7 @@ jobs:
   core-smoke-tests:
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Validate version metadata
         run: ./scripts/check-version.sh
       - name: Build core
