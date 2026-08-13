@@ -49,7 +49,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let isHandlingCreationRequest = ProcessInfo.processInfo.arguments.contains { argument in
             argument.hasPrefix("\(CreationRequest.urlScheme)://")
         }
-        if !isHandlingCreationRequest {
+        if isHandlingCreationRequest {
+            NSApplication.shared.setActivationPolicy(.accessory)
+        } else {
             DispatchQueue.main.async {
                 SettingsWindowPresenter.open()
             }
@@ -57,6 +59,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func application(_ application: NSApplication, open urls: [URL]) {
+        if !SettingsWindowPresenter.isVisible {
+            application.setActivationPolicy(.accessory)
+        }
         urls.forEach(creationRequestHandler.handle)
     }
 
@@ -78,10 +83,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 @MainActor
 enum SettingsWindowPresenter {
-    private static var windowController: NSWindowController?
+    private static var windowController: SettingsWindowController?
+
+    static var isVisible: Bool {
+        windowController?.window?.isVisible == true
+    }
 
     static func open() {
         let application = NSApplication.shared
+        application.setActivationPolicy(.regular)
         application.activate(ignoringOtherApps: true)
 
         if windowController == nil {
@@ -103,7 +113,7 @@ enum SettingsWindowPresenter {
             window.isReleasedWhenClosed = false
             window.setFrameAutosaveName("MacEaseSettingsWindow")
             window.center()
-            windowController = NSWindowController(window: window)
+            windowController = SettingsWindowController(window: window)
         }
 
         guard let window = windowController?.window else { return }
@@ -112,5 +122,21 @@ enum SettingsWindowPresenter {
         }
         windowController?.showWindow(nil)
         window.makeKeyAndOrderFront(nil)
+    }
+}
+
+@MainActor
+private final class SettingsWindowController: NSWindowController, NSWindowDelegate {
+    override init(window: NSWindow?) {
+        super.init(window: window)
+        window?.delegate = self
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    func windowWillClose(_ notification: Notification) {
+        NSApplication.shared.setActivationPolicy(.accessory)
     }
 }

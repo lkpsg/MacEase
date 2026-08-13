@@ -9,6 +9,7 @@ MacEase adds small, native conveniences to macOS and stays available from the me
 - Create an empty file from the Finder context menu.
 - Create a folder from the Finder context menu.
 - Rename a newly created item in place in Finder.
+- Keep MacEase in the menu bar without occupying the Dock after its window closes.
 - Use MacEase in English or Simplified Chinese according to the macOS language setting.
 
 ## Requirements
