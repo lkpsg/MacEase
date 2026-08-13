@@ -54,10 +54,25 @@ final class FinderSync: FIFinderSync {
             return
         }
 
-        guard let requestURL = CreationRequest(kind: kind, directoryURL: directory).url,
-              NSWorkspace.shared.open(requestURL) else {
-            presentError("无法打开 MacEase，请先运行一次主应用。")
+        guard let requestURL = CreationRequest(kind: kind, directoryURL: directory).url else {
+            presentError("无法生成创建请求。")
             return
+        }
+
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.activates = false
+        configuration.addsToRecentItems = false
+        configuration.promptsUserIfNeeded = false
+        NSWorkspace.shared.open(requestURL, configuration: configuration) { _, error in
+            guard error != nil else { return }
+            Task { @MainActor in
+                let alert = NSAlert()
+                alert.alertStyle = .warning
+                alert.messageText = "无法创建"
+                alert.informativeText = "无法打开 MacEase，请先运行一次主应用。"
+                alert.addButton(withTitle: "好")
+                alert.runModal()
+            }
         }
     }
 

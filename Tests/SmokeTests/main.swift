@@ -26,6 +26,7 @@ enum SmokeTests {
         try run("右键文件时定位到父目录", testSelectedFileResolution)
         try run("右键空白处时定位到当前目录", testContainerResolution)
         try run("创建请求 URL 可无损往返", testCreationRequestRoundTrip)
+        try run("默认名称自动避让已存在项目", testAvailableDefaultNames)
 
         print("\n✅ MacEaseCore 冒烟测试通过：\(passed)/\(passed)")
     }
@@ -142,6 +143,21 @@ enum SmokeTests {
             let request = CreationRequest(kind: .file, directoryURL: root)
             let parsed = request.url.flatMap(CreationRequest.init(url:))
             try expect(parsed == request, "创建请求 URL 往返失败")
+        }
+    }
+
+    private static func testAvailableDefaultNames() throws {
+        try withFixture { root, _, _ in
+            _ = try service.create(kind: .file, named: "未命名文件.txt", in: root)
+            _ = try service.create(kind: .folder, named: "未命名文件夹", in: root)
+            try expect(
+                service.availableDefaultName(for: .file, in: root) == "未命名文件 2.txt",
+                "文件默认名称未避让"
+            )
+            try expect(
+                service.availableDefaultName(for: .folder, in: root) == "未命名文件夹 2",
+                "文件夹默认名称未避让"
+            )
         }
     }
 

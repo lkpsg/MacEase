@@ -2,25 +2,15 @@ import FinderSync
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.scenePhase) private var scenePhase
     @State private var extensionIsEnabled = FIFinderSyncController.isExtensionEnabled
-    private let creationRequestHandler = CreationRequestHandler()
+    @State private var accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
 
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             HStack(spacing: 16) {
-                Image(systemName: "cursorarrow.click.2")
-                    .font(.system(size: 34, weight: .medium))
-                    .foregroundStyle(.white)
-                    .frame(width: 64, height: 64)
-                    .background(
-                        LinearGradient(
-                            colors: [.indigo, .blue],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        ),
-                        in: RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    )
+                Image(nsImage: NSApplication.shared.applicationIconImage)
+                    .resizable()
+                    .frame(width: 72, height: 72)
 
                 VStack(alignment: .leading, spacing: 5) {
                     Text("MacEase")
@@ -36,7 +26,7 @@ struct ContentView: View {
                 Label("Finder 右键创建", systemImage: "folder.badge.plus")
                     .font(.headline)
 
-                Text("在 Finder 的空白处、文件或文件夹上右键，即可创建新文件或新文件夹。")
+                Text("右键后立即创建项目，并直接在 Finder 中进入原地命名。不会打开 MacEase 窗口。")
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
 
@@ -55,19 +45,32 @@ struct ContentView: View {
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
 
+            HStack(spacing: 12) {
+                Label(
+                    accessibilityIsGranted ? "Finder 原地命名已启用" : "需要辅助功能权限以自动进入命名",
+                    systemImage: accessibilityIsGranted ? "checkmark.circle.fill" : "exclamationmark.circle"
+                )
+                .foregroundStyle(accessibilityIsGranted ? .green : .secondary)
+
+                Spacer()
+
+                if !accessibilityIsGranted {
+                    Button("允许…") {
+                        accessibilityIsGranted = FinderRenameController()
+                            .requestAccessibilityPermission()
+                    }
+                }
+            }
+
             Text("首次使用时，请在打开的系统设置中启用“MacEase Finder 扩展”。")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
         }
         .padding(32)
         .frame(width: 500)
-        .onChange(of: scenePhase) { phase in
-            if phase == .active {
-                extensionIsEnabled = FIFinderSyncController.isExtensionEnabled
-            }
-        }
-        .onOpenURL { url in
-            creationRequestHandler.handle(url)
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            extensionIsEnabled = FIFinderSyncController.isExtensionEnabled
+            accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
         }
     }
 }

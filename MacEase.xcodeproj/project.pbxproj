@@ -13,11 +13,16 @@
 		33C9E7B0D5F3FB5B61FD0DB1 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7507A4F45FB6AE30D9063AF5 /* FinderSync.swift */; };
 		3585F67B480EA7DAB19B8D54 /* FileCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */; };
 		4951141C4A2010E1F4CFFA4B /* libMacEaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F20D98548D07D0188BF9CB /* libMacEaseCore.a */; };
+		55DBDC6A34CDFDE7332C2159 /* MenuBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */; };
 		7D9F33F0A1E78187DCBDB56E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */; };
 		85370585F0952CC50B6A341A /* CreationKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DD3241F7CC1E1DC09A5DD /* CreationKind.swift */; };
 		99CB57C8BA7FC7733EEE1E89 /* FileCreationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */; };
+		B7A1ED3CB4CCF12A6948FCA0 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 300B359D40E8D806AEC05048 /* AppIcon.icns */; };
 		C1AFF8EB32F2AD2619D8B2C5 /* MacEaseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */; };
+		C371C2F6FE145C849895EB99 /* MenuBarIconTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = E51BA4C85E3EF0FA96E384AB /* MenuBarIconTemplate.png */; };
+		DB02E877D08D8B43B4E1647F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BED8B21D542564E8BFA19BE /* Assets.xcassets */; };
 		E8BD5687E9D20C0410FF7F79 /* CreationRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F62DF0C30E806FA34F310B /* CreationRequestHandler.swift */; };
+		EEDA62257FCD2AEA90D4610A /* FinderRenameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C379CB75E1A3FF48ED3610E6 /* FinderRenameController.swift */; };
 		FF3F7840ECC4DE7601C005A5 /* MacEaseFinderExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 69841E8DAA9A980CA798D974 /* MacEaseFinderExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -60,15 +65,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1BED8B21D542564E8BFA19BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCreationError.swift; sourceTree = "<group>"; };
+		300B359D40E8D806AEC05048 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		31F20D98548D07D0188BF9CB /* libMacEaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMacEaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContentView.swift; sourceTree = "<group>"; };
 		45305D9D11FFDE7781D71454 /* TargetDirectoryResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetDirectoryResolver.swift; sourceTree = "<group>"; };
 		49CC110AAA3FE00AC841A2A6 /* CreationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationRequest.swift; sourceTree = "<group>"; };
 		69841E8DAA9A980CA798D974 /* MacEaseFinderExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacEaseFinderExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7507A4F45FB6AE30D9063AF5 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
 		800DD3241F7CC1E1DC09A5DD /* CreationKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationKind.swift; sourceTree = "<group>"; };
 		81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEaseApp.swift; sourceTree = "<group>"; };
+		C379CB75E1A3FF48ED3610E6 /* FinderRenameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderRenameController.swift; sourceTree = "<group>"; };
 		C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E51BA4C85E3EF0FA96E384AB /* MenuBarIconTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuBarIconTemplate.png; sourceTree = "<group>"; };
 		EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCreationService.swift; sourceTree = "<group>"; };
 		F1FF1BD179368091147728AC /* MacEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7F62DF0C30E806FA34F310B /* CreationRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationRequestHandler.swift; sourceTree = "<group>"; };
@@ -129,11 +139,24 @@
 		72D8ABFB1FDBF69D0E57A1CA /* MacEaseApp */ = {
 			isa = PBXGroup;
 			children = (
+				1BED8B21D542564E8BFA19BE /* Assets.xcassets */,
 				C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */,
 				F7F62DF0C30E806FA34F310B /* CreationRequestHandler.swift */,
+				C379CB75E1A3FF48ED3610E6 /* FinderRenameController.swift */,
 				81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */,
+				41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */,
+				87C1CB229661DE62B7E6B3A3 /* Resources */,
 			);
 			path = MacEaseApp;
+			sourceTree = "<group>";
+		};
+		87C1CB229661DE62B7E6B3A3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				300B359D40E8D806AEC05048 /* AppIcon.icns */,
+				E51BA4C85E3EF0FA96E384AB /* MenuBarIconTemplate.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		A984788DD4D2F71B19C05BB8 /* MacEaseFinderExtension */ = {
@@ -197,6 +220,7 @@
 			buildConfigurationList = 039152B7DC98DB41E298190C /* Build configuration list for PBXNativeTarget "MacEase" */;
 			buildPhases = (
 				B2D2FACB42F1FF7315220C94 /* Sources */,
+				D008910BF92DA2DE88609A76 /* Resources */,
 				7961129CB33DE3E9519B76EF /* Frameworks */,
 				7F0DB05C5601A65D5DD86520 /* Embed Foundation Extensions */,
 			);
@@ -251,6 +275,19 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		D008910BF92DA2DE88609A76 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7A1ED3CB4CCF12A6948FCA0 /* AppIcon.icns in Resources */,
+				DB02E877D08D8B43B4E1647F /* Assets.xcassets in Resources */,
+				C371C2F6FE145C849895EB99 /* MenuBarIconTemplate.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXShellScriptBuildPhase section */
 		1578AB7B7C8B9E266F092DDC /* Copy Swift Objective-C Interface Header */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -297,7 +334,9 @@
 			files = (
 				7D9F33F0A1E78187DCBDB56E /* ContentView.swift in Sources */,
 				E8BD5687E9D20C0410FF7F79 /* CreationRequestHandler.swift in Sources */,
+				EEDA62257FCD2AEA90D4610A /* FinderRenameController.swift in Sources */,
 				C1AFF8EB32F2AD2619D8B2C5 /* MacEaseApp.swift in Sources */,
+				55DBDC6A34CDFDE7332C2159 /* MenuBarContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

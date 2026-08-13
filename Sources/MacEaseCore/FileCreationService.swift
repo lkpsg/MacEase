@@ -66,4 +66,38 @@ public struct FileCreationService {
         }
         return name
     }
+
+    public func availableDefaultName(
+        for kind: CreationKind,
+        in directoryURL: URL
+    ) -> String {
+        let baseName: String
+        let fileExtension: String
+
+        switch kind {
+        case .file:
+            baseName = "未命名文件"
+            fileExtension = "txt"
+        case .folder:
+            baseName = "未命名文件夹"
+            fileExtension = ""
+        }
+
+        for index in 1...10_000 {
+            let suffix = index == 1 ? "" : " \(index)"
+            let name = fileExtension.isEmpty
+                ? "\(baseName)\(suffix)"
+                : "\(baseName)\(suffix).\(fileExtension)"
+            let candidate = directoryURL.appendingPathComponent(
+                name,
+                isDirectory: kind == .folder
+            )
+
+            if !fileManager.fileExists(atPath: candidate.path) {
+                return name
+            }
+        }
+
+        return "\(baseName) \(UUID().uuidString.prefix(8))"
+    }
 }
