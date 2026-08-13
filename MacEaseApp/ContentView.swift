@@ -2,7 +2,7 @@ import FinderSync
 import SwiftUI
 
 struct ContentView: View {
-    @State private var extensionIsEnabled = FIFinderSyncController.isExtensionEnabled
+    @State private var extensionIsEnabled = false
     @State private var accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
 
     var body: some View {
@@ -110,9 +110,21 @@ struct ContentView: View {
         }
         .padding(32)
         .frame(width: 500)
+        .onAppear {
+            refreshFinderExtensionStatus()
+        }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
-            extensionIsEnabled = FIFinderSyncController.isExtensionEnabled
+            refreshFinderExtensionStatus()
             accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
+        }
+    }
+
+    private func refreshFinderExtensionStatus() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let isEnabled = FIFinderSyncController.isExtensionEnabled
+            DispatchQueue.main.async {
+                extensionIsEnabled = isEnabled
+            }
         }
     }
 }

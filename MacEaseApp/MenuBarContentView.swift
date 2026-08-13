@@ -3,7 +3,7 @@ import FinderSync
 import SwiftUI
 
 struct MenuBarContentView: View {
-    @State private var finderExtensionIsEnabled = FIFinderSyncController.isExtensionEnabled
+    @State private var finderExtensionIsEnabled = false
     @State private var accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
 
     var body: some View {
@@ -22,19 +22,7 @@ struct MenuBarContentView: View {
                 "menu.openSettings",
                 fallback: "Open Settings…"
             )) {
-                NSApplication.shared.activate(ignoringOtherApps: true)
-                let didOpen = NSApplication.shared.sendAction(
-                    Selector(("showSettingsWindow:")),
-                    to: nil,
-                    from: nil
-                )
-                if !didOpen {
-                    NSApplication.shared.sendAction(
-                        Selector(("showPreferencesWindow:")),
-                        to: nil,
-                        from: nil
-                    )
-                }
+                SettingsWindowPresenter.open()
             }
 
             Button(AppLocalization.string(
@@ -79,8 +67,17 @@ struct MenuBarContentView: View {
             }
         }
         .onAppear {
-            finderExtensionIsEnabled = FIFinderSyncController.isExtensionEnabled
+            refreshFinderExtensionStatus()
             accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
+        }
+    }
+
+    private func refreshFinderExtensionStatus() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let isEnabled = FIFinderSyncController.isExtensionEnabled
+            DispatchQueue.main.async {
+                finderExtensionIsEnabled = isEnabled
+            }
         }
     }
 }
