@@ -4,6 +4,7 @@ set -eu
 
 project_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 master_icon="$project_root/Design/MacEase-AppIcon-Master.png"
+menu_master="$project_root/Design/MacEase-MenuBarIcon-Master.png"
 app_icon_set="$project_root/MacEaseApp/Assets.xcassets/AppIcon.appiconset"
 menu_icon_set="$project_root/MacEaseApp/Assets.xcassets/MenuBarIcon.imageset"
 runtime_icon="$project_root/MacEaseApp/Resources/AppIcon.icns"
@@ -28,17 +29,18 @@ fi
 
 mkdir -p "$iconset_dir"
 
-"$python_runtime" - "$master_icon" "$app_icon_set" "$menu_icon_set" \
+"$python_runtime" - "$master_icon" "$menu_master" "$app_icon_set" "$menu_icon_set" \
     "$runtime_menu_icon" "$iconset_dir" <<'PY'
 from pathlib import Path
 import sys
 from PIL import Image, ImageDraw
 
 master_path = Path(sys.argv[1])
-app_icon_set = Path(sys.argv[2])
-menu_icon_set = Path(sys.argv[3])
-runtime_menu_icon = Path(sys.argv[4])
-iconset_dir = Path(sys.argv[5])
+menu_master = Path(sys.argv[2])
+app_icon_set = Path(sys.argv[3])
+menu_icon_set = Path(sys.argv[4])
+runtime_menu_icon = Path(sys.argv[5])
+iconset_dir = Path(sys.argv[6])
 
 master = Image.open(master_path).convert("RGBA")
 if master.width != master.height:
@@ -66,30 +68,26 @@ def draw_menu_icon(pixel_size: int) -> Image.Image:
     supersampling = 8
     canvas_size = pixel_size * supersampling
     scale = canvas_size / 18
-    center = canvas_size / 2
     image = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(image)
+    ink = (0, 0, 0, 255)
 
-    petal = Image.new("RGBA", image.size, (0, 0, 0, 0))
-    draw = ImageDraw.Draw(petal)
-    box = (
-        round(6.65 * scale),
-        round(1.5 * scale),
-        round(11.35 * scale),
-        round(9.1 * scale),
-    )
-    draw.rounded_rectangle(
-        box,
-        radius=round(2.35 * scale),
-        fill=(0, 0, 0, 255),
-    )
+    def point(x: float, y: float) -> tuple[int, int]:
+        return round(x * scale), round(y * scale)
 
-    for angle in (0, 120, 240):
-        rotated = petal.rotate(
-            angle,
-            resample=Image.Resampling.BICUBIC,
-            center=(center, center),
-        )
-        image.alpha_composite(rotated)
+    # Monochrome reduction of the app mark.  The orange diamond is omitted in
+    # template mode, where macOS supplies the menu-bar foreground colour.
+    draw.polygon([
+        point(2.4, 2.8),
+        point(5.2, 2.8),
+        point(9.0, 9.3),
+        point(12.8, 2.8),
+        point(15.6, 2.8),
+        point(10.4, 11.7),
+        point(7.6, 11.7),
+    ], fill=ink)
+    draw.rectangle([point(5.1, 11.4), point(12.9, 13.2)], fill=ink)
+    draw.rectangle([point(8.0, 13.0), point(10.0, 17.2)], fill=ink)
 
     return image.resize((pixel_size, pixel_size), Image.Resampling.LANCZOS)
 
@@ -97,6 +95,7 @@ for filename, size in (("MenuBarIcon.png", 18), ("MenuBarIcon@2x.png", 36), ("Me
     draw_menu_icon(size).save(menu_icon_set / filename, optimize=True)
 
 draw_menu_icon(36).save(runtime_menu_icon, optimize=True)
+draw_menu_icon(1024).save(menu_master, optimize=True)
 PY
 
 iconutil -c icns "$iconset_dir" -o "$runtime_icon"
