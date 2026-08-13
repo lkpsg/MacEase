@@ -70,8 +70,8 @@ cd MacEase
 - 编译到仓库同级的 `outputs/MacEase-Debug.app`
 - 验证主应用和 Finder 扩展的代码签名
 - 安装为 `/Applications/MacEase.app`
-- 注册并启用 Finder 扩展，然后重启 Finder、启动 MacEase
-- 若 `/Applications/MacEase.app` 已存在，先备份到仓库的 `work/` 目录，不直接删除旧版
+- 启动 MacEase 以便系统注册内嵌 Finder 扩展，然后重启 Finder
+- 若 `/Applications/MacEase.app` 已存在，使用 `ditto` 原位更新应用内容
 
 只编译、不安装时运行：
 
@@ -118,6 +118,17 @@ killall Finder
 ```
 
 测试覆盖创建文件、创建文件夹、名称校验、防覆盖，以及三种 Finder 右键目标解析规则。
+
+## 重新生成图标资源
+
+仓库已包含构建所需的全部图标。只有修改 `Design/MacEase-AppIcon-Master.png` 后才需要重新生成；脚本需要 Python 3 和 Pillow：
+
+```bash
+python3 -m pip install Pillow
+./scripts/generate-icon-assets.sh
+```
+
+脚本会生成 Xcode Asset Catalog 的全部 App Icon 尺寸、运行时 `.icns`，以及与品牌轮廓一致的单色菜单栏模板图标。
 
 ## 设计说明
 
