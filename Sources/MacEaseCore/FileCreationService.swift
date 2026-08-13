@@ -76,10 +76,20 @@ public struct FileCreationService {
 
         switch kind {
         case .file:
-            baseName = "未命名文件"
+            baseName = NSLocalizedString(
+                "core.defaultFileName",
+                bundle: .main,
+                value: "Untitled File",
+                comment: "Default name for a newly created file"
+            )
             fileExtension = "txt"
         case .folder:
-            baseName = "未命名文件夹"
+            baseName = NSLocalizedString(
+                "core.defaultFolderName",
+                bundle: .main,
+                value: "Untitled Folder",
+                comment: "Default name for a newly created folder"
+            )
             fileExtension = ""
         }
 

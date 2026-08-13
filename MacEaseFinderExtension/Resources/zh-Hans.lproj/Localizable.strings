@@ -1,0 +1,7 @@
+"finder.newFile" = "新建文件";
+"finder.newFolder" = "新建文件夹";
+"finder.error.location" = "无法确定创建位置。";
+"finder.error.request" = "无法生成创建请求。";
+"finder.error.title" = "无法创建";
+"finder.error.openApp" = "无法打开 MacEase，请先运行一次主应用。";
+"common.ok" = "好";

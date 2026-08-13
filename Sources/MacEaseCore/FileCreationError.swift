@@ -11,17 +11,49 @@ public enum FileCreationError: Error, Equatable, LocalizedError, Sendable {
     public var errorDescription: String? {
         switch self {
         case .emptyName:
-            "名称不能为空。"
+            localized(
+                "core.error.emptyName",
+                fallback: "The name cannot be empty."
+            )
         case .invalidName:
-            "名称不能包含斜杠或空字符。"
+            localized(
+                "core.error.invalidName",
+                fallback: "The name cannot contain a slash or null character."
+            )
         case .reservedName:
-            "“.” 和 “..” 不能用作名称。"
+            localized(
+                "core.error.reservedName",
+                fallback: "“.” and “..” cannot be used as names."
+            )
         case .targetIsNotDirectory:
-            "目标位置不是文件夹。"
+            localized(
+                "core.error.targetIsNotDirectory",
+                fallback: "The destination is not a folder."
+            )
         case let .itemAlreadyExists(name):
-            "“\(name)” 已经存在。"
+            String(
+                format: localized(
+                    "core.error.itemAlreadyExists",
+                    fallback: "“%@” already exists."
+                ),
+                locale: .current,
+                name
+            )
         case .unableToCreate:
-            "无法创建项目，请检查文件夹权限后重试。"
+            localized(
+                "core.error.unableToCreate",
+                fallback: "The item could not be created. Check the folder permissions and try again."
+            )
         }
+    }
+
+    private func localized(_ key: String, fallback: String) -> String {
+        NSLocalizedString(
+            key,
+            tableName: nil,
+            bundle: .main,
+            value: fallback,
+            comment: ""
+        )
     }
 }

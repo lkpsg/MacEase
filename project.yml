@@ -36,8 +36,11 @@ targets:
     info:
       path: Config/MacEaseFinderExtension-Info.plist
       properties:
-        CFBundleDevelopmentRegion: zh_CN
-        CFBundleDisplayName: MacEase Finder 扩展
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations:
+          - en
+          - zh-Hans
+        CFBundleDisplayName: MacEase Finder Extension
         CFBundleShortVersionString: 0.1.0
         CFBundleVersion: 1
         LSMinimumSystemVersion: "13.0"
@@ -67,7 +70,10 @@ targets:
     info:
       path: Config/MacEase-Info.plist
       properties:
-        CFBundleDevelopmentRegion: zh_CN
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations:
+          - en
+          - zh-Hans
         CFBundleDisplayName: MacEase
         CFBundleShortVersionString: 0.1.0
         CFBundleVersion: 1

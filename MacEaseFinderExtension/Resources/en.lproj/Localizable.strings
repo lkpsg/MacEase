@@ -1,0 +1,7 @@
+"finder.newFile" = "New File";
+"finder.newFolder" = "New Folder";
+"finder.error.location" = "The destination could not be determined.";
+"finder.error.request" = "The creation request could not be generated.";
+"finder.error.title" = "Unable to Create";
+"finder.error.openApp" = "MacEase could not be opened. Run the main app once and try again.";
+"common.ok" = "OK";

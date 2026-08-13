@@ -15,7 +15,10 @@ struct ContentView: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("MacEase")
                         .font(.system(size: 28, weight: .bold, design: .rounded))
-                    Text("让 macOS 的日常操作更顺手")
+                    Text(AppLocalization.string(
+                        "settings.tagline",
+                        fallback: "Make everyday macOS tasks easier"
+                    ))
                         .foregroundStyle(.secondary)
                 }
             }
@@ -23,10 +26,19 @@ struct ContentView: View {
             Divider()
 
             VStack(alignment: .leading, spacing: 14) {
-                Label("Finder 右键创建", systemImage: "folder.badge.plus")
+                Label(
+                    AppLocalization.string(
+                        "settings.finderCreationTitle",
+                        fallback: "Create from the Finder context menu"
+                    ),
+                    systemImage: "folder.badge.plus"
+                )
                     .font(.headline)
 
-                Text("右键后立即创建项目，并直接在 Finder 中进入原地命名。不会打开 MacEase 窗口。")
+                Text(AppLocalization.string(
+                    "settings.finderCreationDescription",
+                    fallback: "Create an item immediately and rename it in place in Finder, without opening a MacEase window."
+                ))
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
 
@@ -34,12 +46,28 @@ struct ContentView: View {
                     Circle()
                         .fill(extensionIsEnabled ? Color.green : Color.orange)
                         .frame(width: 9, height: 9)
-                    Text(extensionIsEnabled ? "Finder 扩展已启用" : "需要启用 Finder 扩展")
+                    Text(extensionIsEnabled
+                        ? AppLocalization.string(
+                            "settings.finderExtensionEnabled",
+                            fallback: "Finder extension is enabled"
+                        )
+                        : AppLocalization.string(
+                            "settings.finderExtensionRequired",
+                            fallback: "Finder extension needs to be enabled"
+                        ))
                         .fontWeight(.medium)
                 }
             }
 
-            Button(extensionIsEnabled ? "管理 Finder 扩展…" : "启用 Finder 扩展…") {
+            Button(extensionIsEnabled
+                ? AppLocalization.string(
+                    "settings.manageFinderExtension",
+                    fallback: "Manage Finder Extension…"
+                )
+                : AppLocalization.string(
+                    "settings.enableFinderExtension",
+                    fallback: "Enable Finder Extension…"
+                )) {
                 FIFinderSyncController.showExtensionManagementInterface()
             }
             .buttonStyle(.borderedProminent)
@@ -47,7 +75,15 @@ struct ContentView: View {
 
             HStack(spacing: 12) {
                 Label(
-                    accessibilityIsGranted ? "Finder 原地命名已启用" : "需要辅助功能权限以自动进入命名",
+                    accessibilityIsGranted
+                        ? AppLocalization.string(
+                            "settings.renameEnabled",
+                            fallback: "In-place Finder renaming is enabled"
+                        )
+                        : AppLocalization.string(
+                            "settings.renamePermissionRequired",
+                            fallback: "Accessibility access is required to start renaming automatically"
+                        ),
                     systemImage: accessibilityIsGranted ? "checkmark.circle.fill" : "exclamationmark.circle"
                 )
                 .foregroundStyle(accessibilityIsGranted ? .green : .secondary)
@@ -55,14 +91,20 @@ struct ContentView: View {
                 Spacer()
 
                 if !accessibilityIsGranted {
-                    Button("允许…") {
+                    Button(AppLocalization.string(
+                        "settings.allow",
+                        fallback: "Allow…"
+                    )) {
                         accessibilityIsGranted = FinderRenameController()
                             .requestAccessibilityPermission()
                     }
                 }
             }
 
-            Text("首次使用时，请在打开的系统设置中启用“MacEase Finder 扩展”。")
+            Text(AppLocalization.string(
+                "settings.firstUseHint",
+                fallback: "On first use, enable “MacEase Finder Extension” in the System Settings window that opens."
+            ))
                 .font(.caption)
                 .foregroundStyle(.tertiary)
         }

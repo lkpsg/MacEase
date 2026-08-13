@@ -148,14 +148,17 @@ enum SmokeTests {
 
     private static func testAvailableDefaultNames() throws {
         try withFixture { root, _, _ in
-            _ = try service.create(kind: .file, named: "未命名文件.txt", in: root)
-            _ = try service.create(kind: .folder, named: "未命名文件夹", in: root)
+            let firstFileName = service.availableDefaultName(for: .file, in: root)
+            let firstFolderName = service.availableDefaultName(for: .folder, in: root)
+            _ = try service.create(kind: .file, named: firstFileName, in: root)
+            _ = try service.create(kind: .folder, named: firstFolderName, in: root)
             try expect(
-                service.availableDefaultName(for: .file, in: root) == "未命名文件 2.txt",
+                service.availableDefaultName(for: .file, in: root)
+                    == firstFileName.replacingOccurrences(of: ".txt", with: " 2.txt"),
                 "文件默认名称未避让"
             )
             try expect(
-                service.availableDefaultName(for: .folder, in: root) == "未命名文件夹 2",
+                service.availableDefaultName(for: .folder, in: root) == "\(firstFolderName) 2",
                 "文件夹默认名称未避让"
             )
         }

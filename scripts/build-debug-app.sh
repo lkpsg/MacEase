@@ -22,12 +22,17 @@ fi
 mkdir -p \
     "$app_bundle/Contents/MacOS" \
     "$app_bundle/Contents/Resources" \
-    "$extension_bundle/Contents/MacOS"
+    "$extension_bundle/Contents/MacOS" \
+    "$extension_bundle/Contents/Resources"
 
 cp "$project_root/Config/MacEase-Info.plist" "$app_bundle/Contents/Info.plist"
 cp "$project_root/Config/MacEaseFinderExtension-Info.plist" "$extension_bundle/Contents/Info.plist"
 cp "$project_root/MacEaseApp/Resources/AppIcon.icns" "$app_bundle/Contents/Resources/AppIcon.icns"
 cp "$project_root/MacEaseApp/Resources/MenuBarIconTemplate.png" "$app_bundle/Contents/Resources/MenuBarIconTemplate.png"
+cp -R "$project_root/MacEaseApp/Resources/en.lproj" "$app_bundle/Contents/Resources/"
+cp -R "$project_root/MacEaseApp/Resources/zh-Hans.lproj" "$app_bundle/Contents/Resources/"
+cp -R "$project_root/MacEaseFinderExtension/Resources/en.lproj" "$extension_bundle/Contents/Resources/"
+cp -R "$project_root/MacEaseFinderExtension/Resources/zh-Hans.lproj" "$extension_bundle/Contents/Resources/"
 
 plutil -replace CFBundleExecutable -string MacEase "$app_bundle/Contents/Info.plist"
 plutil -replace CFBundleIdentifier -string com.lkpsg.MacEase "$app_bundle/Contents/Info.plist"

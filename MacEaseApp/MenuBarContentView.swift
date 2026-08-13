@@ -8,11 +8,20 @@ struct MenuBarContentView: View {
 
     var body: some View {
         Group {
-            Label("MacEase 正在运行", systemImage: "sparkles")
+            Label(
+                AppLocalization.string(
+                    "menu.running",
+                    fallback: "MacEase is running"
+                ),
+                systemImage: "sparkles"
+            )
 
             Divider()
 
-            Button("打开设置…") {
+            Button(AppLocalization.string(
+                "menu.openSettings",
+                fallback: "Open Settings…"
+            )) {
                 NSApplication.shared.activate(ignoringOtherApps: true)
                 let didOpen = NSApplication.shared.sendAction(
                     Selector(("showSettingsWindow:")),
@@ -28,19 +37,33 @@ struct MenuBarContentView: View {
                 }
             }
 
-            Button("关于 MacEase") {
+            Button(AppLocalization.string(
+                "menu.about",
+                fallback: "About MacEase"
+            )) {
                 NSApplication.shared.activate(ignoringOtherApps: true)
                 NSApplication.shared.orderFrontStandardAboutPanel(nil)
             }
 
             Button(
-                finderExtensionIsEnabled ? "管理 Finder 扩展…" : "启用 Finder 扩展…"
+                finderExtensionIsEnabled
+                    ? AppLocalization.string(
+                        "menu.manageFinderExtension",
+                        fallback: "Manage Finder Extension…"
+                    )
+                    : AppLocalization.string(
+                        "menu.enableFinderExtension",
+                        fallback: "Enable Finder Extension…"
+                    )
             ) {
                 FIFinderSyncController.showExtensionManagementInterface()
             }
 
             if !accessibilityIsGranted {
-                Button("允许 Finder 原地命名…") {
+                Button(AppLocalization.string(
+                    "menu.allowFinderRename",
+                    fallback: "Allow In-place Finder Renaming…"
+                )) {
                     accessibilityIsGranted = FinderRenameController()
                         .requestAccessibilityPermission()
                 }
@@ -48,7 +71,10 @@ struct MenuBarContentView: View {
 
             Divider()
 
-            Button("退出 MacEase") {
+            Button(AppLocalization.string(
+                "menu.quit",
+                fallback: "Quit MacEase"
+            )) {
                 NSApplication.shared.terminate(nil)
             }
         }

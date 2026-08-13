@@ -25,7 +25,16 @@ final class CreationRequestHandler {
         } catch {
             let message = (error as? LocalizedError)?.errorDescription
                 ?? FileCreationError.unableToCreate.localizedDescription
-            logger.error("无法创建\(request.kind.localizedName, privacy: .public)：\(message, privacy: .public)")
+            let logMessage = String(
+                format: AppLocalization.string(
+                    "creation.error.log",
+                    fallback: "Unable to create %@: %@"
+                ),
+                locale: .current,
+                request.kind.localizedName,
+                message
+            )
+            logger.error("\(logMessage, privacy: .public)")
         }
     }
 }

@@ -1,0 +1,32 @@
+"settings.tagline" = "让 macOS 的日常操作更顺手";
+"settings.finderCreationTitle" = "Finder 右键创建";
+"settings.finderCreationDescription" = "右键后立即创建项目，并直接在 Finder 中进入原地命名。不会打开 MacEase 窗口。";
+"settings.finderExtensionEnabled" = "Finder 扩展已启用";
+"settings.finderExtensionRequired" = "需要启用 Finder 扩展";
+"settings.manageFinderExtension" = "管理 Finder 扩展…";
+"settings.enableFinderExtension" = "启用 Finder 扩展…";
+"settings.renameEnabled" = "Finder 原地命名已启用";
+"settings.renamePermissionRequired" = "需要辅助功能权限以自动进入命名";
+"settings.allow" = "允许…";
+"settings.firstUseHint" = "首次使用时，请在打开的系统设置中启用“MacEase Finder 扩展”。";
+
+"menu.running" = "MacEase 正在运行";
+"menu.openSettings" = "打开设置…";
+"menu.about" = "关于 MacEase";
+"menu.manageFinderExtension" = "管理 Finder 扩展…";
+"menu.enableFinderExtension" = "启用 Finder 扩展…";
+"menu.allowFinderRename" = "允许 Finder 原地命名…";
+"menu.quit" = "退出 MacEase";
+
+"creation.error.log" = "无法创建%@：%@";
+
+"core.kind.file" = "文件";
+"core.kind.folder" = "文件夹";
+"core.defaultFileName" = "未命名文件";
+"core.defaultFolderName" = "未命名文件夹";
+"core.error.emptyName" = "名称不能为空。";
+"core.error.invalidName" = "名称不能包含斜杠或空字符。";
+"core.error.reservedName" = "“.” 和 “..” 不能用作名称。";
+"core.error.targetIsNotDirectory" = "目标位置不是文件夹。";
+"core.error.itemAlreadyExists" = "“%@” 已经存在。";
+"core.error.unableToCreate" = "无法创建项目，请检查文件夹权限后重试。";

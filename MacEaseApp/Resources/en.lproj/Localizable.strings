@@ -1,0 +1,32 @@
+"settings.tagline" = "Make everyday macOS tasks easier";
+"settings.finderCreationTitle" = "Create from the Finder context menu";
+"settings.finderCreationDescription" = "Create an item immediately and rename it in place in Finder, without opening a MacEase window.";
+"settings.finderExtensionEnabled" = "Finder extension is enabled";
+"settings.finderExtensionRequired" = "Finder extension needs to be enabled";
+"settings.manageFinderExtension" = "Manage Finder Extension…";
+"settings.enableFinderExtension" = "Enable Finder Extension…";
+"settings.renameEnabled" = "In-place Finder renaming is enabled";
+"settings.renamePermissionRequired" = "Accessibility access is required to start renaming automatically";
+"settings.allow" = "Allow…";
+"settings.firstUseHint" = "On first use, enable “MacEase Finder Extension” in the System Settings window that opens.";
+
+"menu.running" = "MacEase is running";
+"menu.openSettings" = "Open Settings…";
+"menu.about" = "About MacEase";
+"menu.manageFinderExtension" = "Manage Finder Extension…";
+"menu.enableFinderExtension" = "Enable Finder Extension…";
+"menu.allowFinderRename" = "Allow In-place Finder Renaming…";
+"menu.quit" = "Quit MacEase";
+
+"creation.error.log" = "Unable to create %@: %@";
+
+"core.kind.file" = "file";
+"core.kind.folder" = "folder";
+"core.defaultFileName" = "Untitled File";
+"core.defaultFolderName" = "Untitled Folder";
+"core.error.emptyName" = "The name cannot be empty.";
+"core.error.invalidName" = "The name cannot contain a slash or null character.";
+"core.error.reservedName" = "“.” and “..” cannot be used as names.";
+"core.error.targetIsNotDirectory" = "The destination is not a folder.";
+"core.error.itemAlreadyExists" = "“%@” already exists.";
+"core.error.unableToCreate" = "The item could not be created. Check the folder permissions and try again.";

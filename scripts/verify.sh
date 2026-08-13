@@ -9,6 +9,15 @@ echo "==> Validating property lists"
 plutil -lint Config/MacEase-Info.plist
 plutil -lint Config/MacEaseFinderExtension-Info.plist
 plutil -lint Config/MacEaseFinderExtension.entitlements
+plutil -lint \
+    MacEaseApp/Resources/en.lproj/Localizable.strings \
+    MacEaseApp/Resources/en.lproj/InfoPlist.strings \
+    MacEaseApp/Resources/zh-Hans.lproj/Localizable.strings \
+    MacEaseApp/Resources/zh-Hans.lproj/InfoPlist.strings \
+    MacEaseFinderExtension/Resources/en.lproj/Localizable.strings \
+    MacEaseFinderExtension/Resources/en.lproj/InfoPlist.strings \
+    MacEaseFinderExtension/Resources/zh-Hans.lproj/Localizable.strings \
+    MacEaseFinderExtension/Resources/zh-Hans.lproj/InfoPlist.strings
 
 echo "==> Checking generated Xcode project"
 xcodegen generate
