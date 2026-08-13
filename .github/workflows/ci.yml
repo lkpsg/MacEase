@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  core-smoke-tests:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build core
+        run: swift build
+      - name: Run file-system smoke tests
+        run: swift run MacEaseCoreSmokeTests

@@ -1,0 +1,622 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18D691EBC0A39DFC03B73641 /* CreationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC110AAA3FE00AC841A2A6 /* CreationRequest.swift */; };
+		1E6549AFC0F128DFF9515526 /* libMacEaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F20D98548D07D0188BF9CB /* libMacEaseCore.a */; };
+		2F70238D926DB5DE8DA7DA98 /* TargetDirectoryResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45305D9D11FFDE7781D71454 /* TargetDirectoryResolver.swift */; };
+		33C9E7B0D5F3FB5B61FD0DB1 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7507A4F45FB6AE30D9063AF5 /* FinderSync.swift */; };
+		3585F67B480EA7DAB19B8D54 /* FileCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */; };
+		4951141C4A2010E1F4CFFA4B /* libMacEaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F20D98548D07D0188BF9CB /* libMacEaseCore.a */; };
+		7D9F33F0A1E78187DCBDB56E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */; };
+		85370585F0952CC50B6A341A /* CreationKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DD3241F7CC1E1DC09A5DD /* CreationKind.swift */; };
+		99CB57C8BA7FC7733EEE1E89 /* FileCreationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */; };
+		C1AFF8EB32F2AD2619D8B2C5 /* MacEaseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */; };
+		E8BD5687E9D20C0410FF7F79 /* CreationRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F62DF0C30E806FA34F310B /* CreationRequestHandler.swift */; };
+		FF3F7840ECC4DE7601C005A5 /* MacEaseFinderExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 69841E8DAA9A980CA798D974 /* MacEaseFinderExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3655DCA209330470BB961BEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84A4C9E3AE7F1388091EEB83 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8612F1EAFC9617644FDC5A8B;
+			remoteInfo = MacEaseFinderExtension;
+		};
+		703D55090B22C46A60B587EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84A4C9E3AE7F1388091EEB83 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49A0D92F3FF4E826B234CD39;
+			remoteInfo = MacEaseCore;
+		};
+		F7551C8D851FA170451C8217 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84A4C9E3AE7F1388091EEB83 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49A0D92F3FF4E826B234CD39;
+			remoteInfo = MacEaseCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7F0DB05C5601A65D5DD86520 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FF3F7840ECC4DE7601C005A5 /* MacEaseFinderExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCreationError.swift; sourceTree = "<group>"; };
+		31F20D98548D07D0188BF9CB /* libMacEaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMacEaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		45305D9D11FFDE7781D71454 /* TargetDirectoryResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetDirectoryResolver.swift; sourceTree = "<group>"; };
+		49CC110AAA3FE00AC841A2A6 /* CreationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationRequest.swift; sourceTree = "<group>"; };
+		69841E8DAA9A980CA798D974 /* MacEaseFinderExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacEaseFinderExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7507A4F45FB6AE30D9063AF5 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
+		800DD3241F7CC1E1DC09A5DD /* CreationKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationKind.swift; sourceTree = "<group>"; };
+		81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEaseApp.swift; sourceTree = "<group>"; };
+		C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCreationService.swift; sourceTree = "<group>"; };
+		F1FF1BD179368091147728AC /* MacEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7F62DF0C30E806FA34F310B /* CreationRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationRequestHandler.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7961129CB33DE3E9519B76EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4951141C4A2010E1F4CFFA4B /* libMacEaseCore.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A868E3EF1768DB88D4151AC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E6549AFC0F128DFF9515526 /* libMacEaseCore.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		29DA3771E15295D01525529F = {
+			isa = PBXGroup;
+			children = (
+				72D8ABFB1FDBF69D0E57A1CA /* MacEaseApp */,
+				A984788DD4D2F71B19C05BB8 /* MacEaseFinderExtension */,
+				FD4C16875A930F3B2B86C4DC /* Sources */,
+				7068CFC49E3C603D273FF109 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		40F72A43A5B634398F74D018 /* MacEaseCore */ = {
+			isa = PBXGroup;
+			children = (
+				800DD3241F7CC1E1DC09A5DD /* CreationKind.swift */,
+				49CC110AAA3FE00AC841A2A6 /* CreationRequest.swift */,
+				30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */,
+				EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */,
+				45305D9D11FFDE7781D71454 /* TargetDirectoryResolver.swift */,
+			);
+			path = MacEaseCore;
+			sourceTree = "<group>";
+		};
+		7068CFC49E3C603D273FF109 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				31F20D98548D07D0188BF9CB /* libMacEaseCore.a */,
+				F1FF1BD179368091147728AC /* MacEase.app */,
+				69841E8DAA9A980CA798D974 /* MacEaseFinderExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		72D8ABFB1FDBF69D0E57A1CA /* MacEaseApp */ = {
+			isa = PBXGroup;
+			children = (
+				C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */,
+				F7F62DF0C30E806FA34F310B /* CreationRequestHandler.swift */,
+				81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */,
+			);
+			path = MacEaseApp;
+			sourceTree = "<group>";
+		};
+		A984788DD4D2F71B19C05BB8 /* MacEaseFinderExtension */ = {
+			isa = PBXGroup;
+			children = (
+				7507A4F45FB6AE30D9063AF5 /* FinderSync.swift */,
+			);
+			path = MacEaseFinderExtension;
+			sourceTree = "<group>";
+		};
+		FD4C16875A930F3B2B86C4DC /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				40F72A43A5B634398F74D018 /* MacEaseCore */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49A0D92F3FF4E826B234CD39 /* MacEaseCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D67CE14EC3FC3B2512014259 /* Build configuration list for PBXNativeTarget "MacEaseCore" */;
+			buildPhases = (
+				B1CC37BCC7CB218C25FBD671 /* Sources */,
+				1578AB7B7C8B9E266F092DDC /* Copy Swift Objective-C Interface Header */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacEaseCore;
+			packageProductDependencies = (
+			);
+			productName = MacEaseCore;
+			productReference = 31F20D98548D07D0188BF9CB /* libMacEaseCore.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		8612F1EAFC9617644FDC5A8B /* MacEaseFinderExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD7182333B4D122109E63E2B /* Build configuration list for PBXNativeTarget "MacEaseFinderExtension" */;
+			buildPhases = (
+				60D870238A23EA0F10BCD945 /* Sources */,
+				A868E3EF1768DB88D4151AC9 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C6C68FD8D46E29795B87E30F /* PBXTargetDependency */,
+			);
+			name = MacEaseFinderExtension;
+			packageProductDependencies = (
+			);
+			productName = MacEaseFinderExtension;
+			productReference = 69841E8DAA9A980CA798D974 /* MacEaseFinderExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		948DABDE4AB1679DAC76301A /* MacEase */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 039152B7DC98DB41E298190C /* Build configuration list for PBXNativeTarget "MacEase" */;
+			buildPhases = (
+				B2D2FACB42F1FF7315220C94 /* Sources */,
+				7961129CB33DE3E9519B76EF /* Frameworks */,
+				7F0DB05C5601A65D5DD86520 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FBF4CF3F729BD0766E046251 /* PBXTargetDependency */,
+				51919E351C54E5A35C466358 /* PBXTargetDependency */,
+			);
+			name = MacEase;
+			packageProductDependencies = (
+			);
+			productName = MacEase;
+			productReference = F1FF1BD179368091147728AC /* MacEase.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		84A4C9E3AE7F1388091EEB83 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					8612F1EAFC9617644FDC5A8B = {
+						ProvisioningStyle = Automatic;
+					};
+					948DABDE4AB1679DAC76301A = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 66F6C7BA24476BBE8139F7DD /* Build configuration list for PBXProject "MacEase" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 29DA3771E15295D01525529F;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 7068CFC49E3C603D273FF109 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49A0D92F3FF4E826B234CD39 /* MacEaseCore */,
+				8612F1EAFC9617644FDC5A8B /* MacEaseFinderExtension */,
+				948DABDE4AB1679DAC76301A /* MacEase */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1578AB7B7C8B9E266F092DDC /* Copy Swift Objective-C Interface Header */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(DERIVED_SOURCES_DIR)/$(SWIFT_OBJC_INTERFACE_HEADER_NAME)",
+			);
+			name = "Copy Swift Objective-C Interface Header";
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/include/$(PRODUCT_MODULE_NAME)/$(SWIFT_OBJC_INTERFACE_HEADER_NAME)",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "ditto \"${SCRIPT_INPUT_FILE_0}\" \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		60D870238A23EA0F10BCD945 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33C9E7B0D5F3FB5B61FD0DB1 /* FinderSync.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1CC37BCC7CB218C25FBD671 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85370585F0952CC50B6A341A /* CreationKind.swift in Sources */,
+				18D691EBC0A39DFC03B73641 /* CreationRequest.swift in Sources */,
+				99CB57C8BA7FC7733EEE1E89 /* FileCreationError.swift in Sources */,
+				3585F67B480EA7DAB19B8D54 /* FileCreationService.swift in Sources */,
+				2F70238D926DB5DE8DA7DA98 /* TargetDirectoryResolver.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B2D2FACB42F1FF7315220C94 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D9F33F0A1E78187DCBDB56E /* ContentView.swift in Sources */,
+				E8BD5687E9D20C0410FF7F79 /* CreationRequestHandler.swift in Sources */,
+				C1AFF8EB32F2AD2619D8B2C5 /* MacEaseApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		51919E351C54E5A35C466358 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8612F1EAFC9617644FDC5A8B /* MacEaseFinderExtension */;
+			targetProxy = 3655DCA209330470BB961BEA /* PBXContainerItemProxy */;
+		};
+		C6C68FD8D46E29795B87E30F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49A0D92F3FF4E826B234CD39 /* MacEaseCore */;
+			targetProxy = F7551C8D851FA170451C8217 /* PBXContainerItemProxy */;
+		};
+		FBF4CF3F729BD0766E046251 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49A0D92F3FF4E826B234CD39 /* MacEaseCore */;
+			targetProxy = 703D55090B22C46A60B587EE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0E6831AE362915D00672765B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Config/MacEase-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lkpsg.MacEase;
+				PRODUCT_MODULE_NAME = MacEase;
+				PRODUCT_NAME = MacEase;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		1121E1EEB5AE9F1FCC7B6253 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/MacEaseFinderExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Config/MacEaseFinderExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lkpsg.MacEase.FinderExtension;
+				PRODUCT_MODULE_NAME = MacEaseFinderExtension;
+				PRODUCT_NAME = MacEaseFinderExtension;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		4BBF3B30D35A5AD2128E927C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = Config/MacEaseFinderExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Config/MacEaseFinderExtension-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lkpsg.MacEase.FinderExtension;
+				PRODUCT_MODULE_NAME = MacEaseFinderExtension;
+				PRODUCT_NAME = MacEaseFinderExtension;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6BBD1CB6211EC42FEF4A1D98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lkpsg.MacEaseCore;
+				PRODUCT_MODULE_NAME = MacEaseCore;
+				PRODUCT_NAME = MacEaseCore;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7BB28ED718CC9526FCC6372B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "Config/MacEase-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lkpsg.MacEase;
+				PRODUCT_MODULE_NAME = MacEase;
+				PRODUCT_NAME = MacEase;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		86DD03EFCD7D7CB0E1E474AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lkpsg.MacEaseCore;
+				PRODUCT_MODULE_NAME = MacEaseCore;
+				PRODUCT_NAME = MacEaseCore;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DB4B637384547F3CE3C731EF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		FADABEFE60CEB29C2FFE27A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		039152B7DC98DB41E298190C /* Build configuration list for PBXNativeTarget "MacEase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7BB28ED718CC9526FCC6372B /* Debug */,
+				0E6831AE362915D00672765B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		66F6C7BA24476BBE8139F7DD /* Build configuration list for PBXProject "MacEase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB4B637384547F3CE3C731EF /* Debug */,
+				FADABEFE60CEB29C2FFE27A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AD7182333B4D122109E63E2B /* Build configuration list for PBXNativeTarget "MacEaseFinderExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1121E1EEB5AE9F1FCC7B6253 /* Debug */,
+				4BBF3B30D35A5AD2128E927C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D67CE14EC3FC3B2512014259 /* Build configuration list for PBXNativeTarget "MacEaseCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86DD03EFCD7D7CB0E1E474AD /* Debug */,
+				6BBD1CB6211EC42FEF4A1D98 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 84A4C9E3AE7F1388091EEB83 /* Project object */;
+}

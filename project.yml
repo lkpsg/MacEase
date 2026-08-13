@@ -1,0 +1,102 @@
+name: MacEase
+
+options:
+  bundleIdPrefix: com.lkpsg
+  deploymentTarget:
+    macOS: "13.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    MACOSX_DEPLOYMENT_TARGET: "13.0"
+    SWIFT_VERSION: "6.0"
+    CLANG_ENABLE_MODULES: YES
+    SWIFT_STRICT_CONCURRENCY: complete
+
+targets:
+  MacEaseCore:
+    type: library.static
+    platform: macOS
+    sources:
+      - path: Sources/MacEaseCore
+    settings:
+      base:
+        PRODUCT_NAME: MacEaseCore
+        PRODUCT_MODULE_NAME: MacEaseCore
+        SKIP_INSTALL: YES
+
+  MacEaseFinderExtension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: MacEaseFinderExtension
+    dependencies:
+      - target: MacEaseCore
+    info:
+      path: Config/MacEaseFinderExtension-Info.plist
+      properties:
+        CFBundleDevelopmentRegion: zh_CN
+        CFBundleDisplayName: MacEase Finder 扩展
+        CFBundleShortVersionString: 0.1.0
+        CFBundleVersion: 1
+        LSMinimumSystemVersion: "13.0"
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.FinderSync
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).FinderSync
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lkpsg.MacEase.FinderExtension
+        PRODUCT_NAME: MacEaseFinderExtension
+        PRODUCT_MODULE_NAME: MacEaseFinderExtension
+        APPLICATION_EXTENSION_API_ONLY: YES
+        CODE_SIGN_ENTITLEMENTS: Config/MacEaseFinderExtension.entitlements
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: NO
+        SKIP_INSTALL: YES
+
+  MacEase:
+    type: application
+    platform: macOS
+    sources:
+      - path: MacEaseApp
+    dependencies:
+      - target: MacEaseCore
+      - target: MacEaseFinderExtension
+        embed: true
+    info:
+      path: Config/MacEase-Info.plist
+      properties:
+        CFBundleDevelopmentRegion: zh_CN
+        CFBundleDisplayName: MacEase
+        CFBundleShortVersionString: 0.1.0
+        CFBundleVersion: 1
+        LSApplicationCategoryType: public.app-category.utilities
+        LSMinimumSystemVersion: "13.0"
+        NSHighResolutionCapable: true
+        CFBundleURLTypes:
+          - CFBundleTypeRole: Editor
+            CFBundleURLName: com.lkpsg.MacEase.create
+            CFBundleURLSchemes:
+              - macease
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lkpsg.MacEase
+        PRODUCT_NAME: MacEase
+        PRODUCT_MODULE_NAME: MacEase
+        CODE_SIGN_STYLE: Automatic
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.utilities
+        SWIFT_EMIT_LOC_STRINGS: YES
+
+schemes:
+  MacEase:
+    build:
+      targets:
+        MacEase: all
+        MacEaseFinderExtension: all
+        MacEaseCore: all
+    run:
+      config: Debug
+    archive:
+      config: Release
