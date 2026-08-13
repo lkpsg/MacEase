@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">MacEase app icon</title>
+  <desc id="desc">A centered black W above a black T, accented by a vermilion diamond.</desc>
+
+  <!-- The background is a clean, symmetric macOS icon silhouette. -->
+  <rect width="1024" height="1024" rx="224" fill="#F5F1E8"/>
+
+  <!-- The selected TW mark, rebuilt with exact mirrored edges and flat fills. -->
+  <path
+    d="M192 200 H346 L512 440 L678 200 H832 L622 542 H584 L512 458 L440 542 H402 Z"
+    fill="#171717"
+  />
+  <path d="M512 166 L586 240 L512 314 L438 240 Z" fill="#FF4D2E"/>
+  <rect x="372" y="546" width="280" height="66" rx="2" fill="#171717"/>
+  <rect x="462" y="606" width="100" height="286" rx="2" fill="#171717"/>
+</svg>

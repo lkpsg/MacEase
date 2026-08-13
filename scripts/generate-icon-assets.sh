@@ -3,7 +3,8 @@
 set -eu
 
 project_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-master_icon="$project_root/Design/MacEase-AppIcon-Master.png"
+master_icon="$project_root/Design/MacEase-AppIcon.svg"
+master_png="$project_root/Design/MacEase-AppIcon-Master.png"
 menu_master="$project_root/Design/MacEase-MenuBarIcon-Master.png"
 app_icon_set="$project_root/MacEaseApp/Assets.xcassets/AppIcon.appiconset"
 menu_icon_set="$project_root/MacEaseApp/Assets.xcassets/MenuBarIcon.imageset"
@@ -27,9 +28,16 @@ if ! "$python_runtime" -c 'import PIL' >/dev/null 2>&1; then
     exit 1
 fi
 
+if ! command -v sips >/dev/null 2>&1; then
+    echo "错误：找不到 sips，无法渲染 SVG 图标。" >&2
+    exit 1
+fi
+
 mkdir -p "$iconset_dir"
 
-"$python_runtime" - "$master_icon" "$menu_master" "$app_icon_set" "$menu_icon_set" \
+sips -s format png "$master_icon" --out "$master_png" >/dev/null
+
+"$python_runtime" - "$master_png" "$menu_master" "$app_icon_set" "$menu_icon_set" \
     "$runtime_menu_icon" "$iconset_dir" <<'PY'
 from pathlib import Path
 import sys
@@ -46,6 +54,42 @@ master = Image.open(master_path).convert("RGBA")
 if master.width != master.height:
     raise SystemExit("App icon master must be square")
 
+# Core Graphics can introduce one-level channel differences on mirrored SVG
+# edges.  Normalise those pixels so the exported icon is exactly centred and
+# keep the translucent outer edge in the background colour instead of grey.
+pixels = master.load()
+for y in range(master.height):
+    for x in range(master.width // 2):
+        opposite_x = master.width - x - 1
+        left = pixels[x, y]
+        right = pixels[opposite_x, y]
+        mirrored = tuple((left[channel] + right[channel] + 1) // 2 for channel in range(4))
+        pixels[x, y] = mirrored
+        pixels[opposite_x, y] = mirrored
+
+background_colour = (245, 241, 232)
+
+def normalise_translucent_edge(image: Image.Image) -> None:
+    image_pixels = image.load()
+    for image_y in range(image.height):
+        for image_x in range(image.width):
+            alpha = image_pixels[image_x, image_y][3]
+            if 0 < alpha < 255:
+                image_pixels[image_x, image_y] = (*background_colour, alpha)
+
+for y in range(master.height // 2):
+    opposite_y = master.height - y - 1
+    for x in range(master.width):
+        top_alpha = pixels[x, y][3]
+        bottom_alpha = pixels[x, opposite_y][3]
+        mirrored_alpha = (top_alpha + bottom_alpha + 1) // 2
+        pixels[x, y] = (*pixels[x, y][:3], mirrored_alpha)
+        pixels[x, opposite_y] = (*pixels[x, opposite_y][:3], mirrored_alpha)
+
+normalise_translucent_edge(master)
+
+master.save(master_path, optimize=True)
+
 resampling = Image.Resampling.LANCZOS
 app_sizes = {
     "icon_16x16.png": 16,
@@ -61,6 +105,7 @@ app_sizes = {
 }
 for filename, size in app_sizes.items():
     resized = master.resize((size, size), resampling)
+    normalise_translucent_edge(resized)
     resized.save(app_icon_set / filename, optimize=True)
     resized.save(iconset_dir / filename, optimize=True)
 

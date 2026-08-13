@@ -5,6 +5,7 @@ All notable changes to MacEase are documented here. The project follows [Semanti
 ## [0.1.1] - 2026-08-13
 
 - Hid the Dock icon after the settings window closes while keeping MacEase available in the menu bar.
+- Rebuilt the app icon with centered geometry, full coverage, and clean edges.
 
 ## [0.1.0] - 2026-08-13
 
