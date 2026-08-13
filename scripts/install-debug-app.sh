@@ -3,7 +3,7 @@
 set -eu
 
 project_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-output_root=${1:-"$project_root/../outputs"}
+output_root=${1:-"$project_root/outputs"}
 built_app="$output_root/MacEase-Debug.app"
 installed_app="/Applications/MacEase.app"
 

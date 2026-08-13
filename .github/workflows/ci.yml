@@ -9,6 +9,8 @@ jobs:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
+      - name: Validate version metadata
+        run: ./scripts/check-version.sh
       - name: Build core
         run: swift build
       - name: Run file-system smoke tests

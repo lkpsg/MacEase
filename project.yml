@@ -7,6 +7,10 @@ options:
   createIntermediateGroups: true
   generateEmptyDirectories: true
 
+configFiles:
+  Debug: Config/Version.xcconfig
+  Release: Config/Version.xcconfig
+
 settings:
   base:
     MACOSX_DEPLOYMENT_TARGET: "13.0"
@@ -41,8 +45,8 @@ targets:
           - en
           - zh-Hans
         CFBundleDisplayName: MacEase Finder Extension
-        CFBundleShortVersionString: 0.1.0
-        CFBundleVersion: 1
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSMinimumSystemVersion: "13.0"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.FinderSync
@@ -75,8 +79,8 @@ targets:
           - en
           - zh-Hans
         CFBundleDisplayName: MacEase
-        CFBundleShortVersionString: 0.1.0
-        CFBundleVersion: 1
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSApplicationCategoryType: public.app-category.utilities
         LSMinimumSystemVersion: "13.0"
         NSHighResolutionCapable: true

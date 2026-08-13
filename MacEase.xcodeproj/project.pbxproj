@@ -93,6 +93,7 @@
 		C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D09023CE4770D8A587EED62D /* AppLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalization.swift; sourceTree = "<group>"; };
 		E51BA4C85E3EF0FA96E384AB /* MenuBarIconTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuBarIconTemplate.png; sourceTree = "<group>"; };
+		E7250181619E62F0EE7CD349 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCreationService.swift; sourceTree = "<group>"; };
 		F1FF1BD179368091147728AC /* MacEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7F62DF0C30E806FA34F310B /* CreationRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationRequestHandler.swift; sourceTree = "<group>"; };
@@ -118,9 +119,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C3E06EEB15379358E5BB33E /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				E7250181619E62F0EE7CD349 /* Version.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		29DA3771E15295D01525529F = {
 			isa = PBXGroup;
 			children = (
+				0C3E06EEB15379358E5BB33E /* Config */,
 				72D8ABFB1FDBF69D0E57A1CA /* MacEaseApp */,
 				A984788DD4D2F71B19C05BB8 /* MacEaseFinderExtension */,
 				FD4C16875A930F3B2B86C4DC /* Sources */,
@@ -577,6 +587,7 @@
 		};
 		DB4B637384547F3CE3C731EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7250181619E62F0EE7CD349 /* Version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -641,6 +652,7 @@
 		};
 		FADABEFE60CEB29C2FFE27A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7250181619E62F0EE7CD349 /* Version.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

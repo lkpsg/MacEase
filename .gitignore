@@ -4,3 +4,5 @@
 *.xcuserstate
 xcuserdata/
 /work
+/dist
+/outputs

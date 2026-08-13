@@ -5,6 +5,9 @@ set -eu
 project_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 cd "$project_root"
 
+echo "==> Checking version metadata"
+./scripts/check-version.sh
+
 echo "==> Validating property lists"
 plutil -lint Config/MacEase-Info.plist
 plutil -lint Config/MacEaseFinderExtension-Info.plist
