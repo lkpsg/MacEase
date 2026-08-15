@@ -43,6 +43,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let creationRequestHandler = CreationRequestHandler()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        ScrollDirectionController.shared.reloadPreferences()
+
         // Finder creation requests launch the app with their URL attached and
         // must stay in the background. A normal Dock/Finder launch has no URL,
         // so show the settings window immediately.
@@ -79,6 +81,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         return true
     }
+
+    func applicationDidBecomeActive(_ notification: Notification) {
+        ScrollDirectionController.shared.reloadPreferences()
+    }
 }
 
 @MainActor
@@ -95,7 +101,7 @@ enum SettingsWindowPresenter {
         application.activate(ignoringOtherApps: true)
 
         if windowController == nil {
-            let contentSize = NSSize(width: 500, height: 520)
+            let contentSize = NSSize(width: 560, height: 700)
             let hostingView = NSHostingView(rootView: ContentView())
             hostingView.frame = NSRect(origin: .zero, size: contentSize)
             hostingView.autoresizingMask = [.width, .height]

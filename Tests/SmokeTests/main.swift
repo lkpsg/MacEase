@@ -27,6 +27,10 @@ enum SmokeTests {
         try run("右键空白处时定位到当前目录", testContainerResolution)
         try run("创建请求 URL 可无损往返", testCreationRequestRoundTrip)
         try run("默认名称自动避让已存在项目", testAvailableDefaultNames)
+        try run("连续滚动事件识别为触摸板", testContinuousScrollInput)
+        try run("离散滚动事件识别为鼠标滚轮", testDiscreteScrollInput)
+        try run("自然滚动方向决策", testNaturalScrollDecision)
+        try run("反向滚动方向决策", testReversedScrollDecision)
 
         print("\n✅ MacEaseCore 冒烟测试通过：\(passed)/\(passed)")
     }
@@ -162,6 +166,54 @@ enum SmokeTests {
                 "文件夹默认名称未避让"
             )
         }
+    }
+
+    private static func testContinuousScrollInput() throws {
+        try expect(
+            ScrollInputKind(usesContinuousDeltas: true) == .trackpad,
+            "连续滚动事件未识别为触摸板"
+        )
+    }
+
+    private static func testDiscreteScrollInput() throws {
+        try expect(
+            ScrollInputKind(usesContinuousDeltas: false) == .mouseWheel,
+            "离散滚动事件未识别为鼠标滚轮"
+        )
+    }
+
+    private static func testNaturalScrollDecision() throws {
+        try expect(
+            !ScrollDirectionDecision.shouldReverseEvent(
+                systemUsesNaturalDirection: true,
+                preferredDirection: .natural
+            ),
+            "系统已自然滚动时不应反转"
+        )
+        try expect(
+            ScrollDirectionDecision.shouldReverseEvent(
+                systemUsesNaturalDirection: false,
+                preferredDirection: .natural
+            ),
+            "系统为传统滚动时应反转为自然滚动"
+        )
+    }
+
+    private static func testReversedScrollDecision() throws {
+        try expect(
+            ScrollDirectionDecision.shouldReverseEvent(
+                systemUsesNaturalDirection: true,
+                preferredDirection: .reversed
+            ),
+            "系统为自然滚动时应执行反向滚动"
+        )
+        try expect(
+            !ScrollDirectionDecision.shouldReverseEvent(
+                systemUsesNaturalDirection: false,
+                preferredDirection: .reversed
+            ),
+            "系统已是反向滚动时不应再次反转"
+        )
     }
 
     private static func expect(_ condition: @autoclosure () throws -> Bool, _ message: String) throws {

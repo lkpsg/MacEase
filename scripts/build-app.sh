@@ -5,6 +5,7 @@ set -eu
 project_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 output_root=${1:-"$project_root/outputs"}
 configuration=${MACEASE_BUILD_CONFIGURATION:-debug}
+code_sign_identity=${MACEASE_CODE_SIGN_IDENTITY:--}
 
 case "$configuration" in
     debug)
@@ -88,10 +89,22 @@ swiftc $optimization_flags -emit-executable -parse-as-library "$project_root/Mac
     -framework AppKit -framework FinderSync -application-extension \
     -Xlinker -e -Xlinker _NSExtensionMain -o "$extension_executable"
 
-codesign --force --sign - \
+codesign --force --sign "$code_sign_identity" \
     --entitlements "$project_root/Config/MacEaseFinderExtension.entitlements" \
     "$extension_bundle"
-codesign --force --sign - "$app_bundle"
+if [ "$code_sign_identity" = "-" ] && [ "$configuration" = "debug" ]; then
+    # An ordinary ad-hoc signature uses the build-specific cdhash as its
+    # designated requirement. macOS privacy permissions would then become
+    # stale after every local rebuild, so local debug builds embed a stable
+    # identifier requirement instead. Release builds never receive this
+    # development-only requirement; pass MACEASE_CODE_SIGN_IDENTITY when an
+    # Apple signing identity is available.
+    codesign --force --sign "$code_sign_identity" \
+        --requirements "$project_root/Config/MacEase-AdHoc.requirements" \
+        "$app_bundle"
+else
+    codesign --force --sign "$code_sign_identity" "$app_bundle"
+fi
 codesign --verify --deep --strict --verbose=2 "$app_bundle"
 
 echo "$app_bundle"

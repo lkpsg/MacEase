@@ -5,10 +5,20 @@
 "settings.finderExtensionRequired" = "需要启用 Finder 扩展";
 "settings.manageFinderExtension" = "管理 Finder 扩展…";
 "settings.enableFinderExtension" = "启用 Finder 扩展…";
-"settings.renameEnabled" = "Finder 原地命名已启用";
-"settings.renamePermissionRequired" = "需要辅助功能权限以自动进入命名";
-"settings.allow" = "允许…";
-"settings.firstUseHint" = "首次使用时，请在打开的系统设置中启用“MacEase Finder 扩展”。";
+"settings.accessibilityEnabled" = "辅助功能权限已启用";
+"settings.accessibilityPermissionRequired" = "Finder 原地命名和滚动方向控制需要辅助功能权限";
+"settings.openAccessibilitySettings" = "打开系统设置…";
+"settings.firstUseHint" = "首次使用时，请在系统设置中启用 Finder 扩展并允许辅助功能权限。";
+"settings.scrollDirectionTitle" = "滚动方向";
+"settings.scrollDirectionDescription" = "分别为触摸板和鼠标滚轮选择自然滚动或反向滚动。";
+"settings.enableScrollDirection" = "控制滚动方向";
+"settings.trackpad" = "触摸板";
+"settings.mouseWheel" = "鼠标滚轮";
+"settings.scrollNatural" = "自然滚动";
+"settings.scrollReversed" = "反向滚动";
+"settings.scrollModeHint" = "自然滚动时内容跟随手势方向；反向滚动则相反。";
+"settings.scrollActive" = "滚动方向控制已生效";
+"settings.scrollPermissionHint" = "macOS 尚未向当前 MacEase 进程返回权限。如果系统设置中已开启，请移除旧的 MacEase 条目，重新添加 /Applications/MacEase.app，然后重新打开应用。";
 
 "menu.running" = "MacEase 正在运行";
 "menu.openSettings" = "打开设置…";
@@ -16,6 +26,7 @@
 "menu.manageFinderExtension" = "管理 Finder 扩展…";
 "menu.enableFinderExtension" = "启用 Finder 扩展…";
 "menu.allowFinderRename" = "允许 Finder 原地命名…";
+"menu.scrollDirection" = "滚动方向控制";
 "menu.quit" = "退出 MacEase";
 
 "creation.error.log" = "无法创建%@：%@";

@@ -10,6 +10,7 @@ MacEase adds small, native conveniences to macOS and stays available from the me
 - Create a folder from the Finder context menu.
 - Rename a newly created item in place in Finder.
 - Keep MacEase in the menu bar without occupying the Dock after its window closes.
+- Set natural or reversed scrolling independently for the trackpad and mouse wheel.
 - Use MacEase in English or Simplified Chinese according to the macOS language setting.
 
 ## Requirements
@@ -22,7 +23,7 @@ MacEase adds small, native conveniences to macOS and stays available from the me
 1. Download `MacEase-vX.Y.Z-arm64.dmg` from the [latest release](https://github.com/lkpsg/MacEase/releases/latest).
 2. Open the DMG and drag `MacEase.app` to `Applications`.
 3. Control-click MacEase and choose **Open** on the first launch.
-4. In MacEase, enable the Finder extension and grant Accessibility access for automatic in-place renaming.
+4. In MacEase, enable the Finder extension and grant Accessibility access for in-place renaming and scroll direction control.
 
 The downloadable build is ad-hoc signed and is not Apple-notarized yet.
 

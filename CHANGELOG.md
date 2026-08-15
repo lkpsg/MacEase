@@ -2,6 +2,13 @@
 
 All notable changes to MacEase are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-08-15
+
+- Added independent natural or reversed scrolling for trackpads and mouse wheels.
+- Kept local development signatures stable so Accessibility access survives rebuilds.
+- Added a clear runtime status for scroll direction control.
+- Stopped requesting Accessibility access automatically when scroll control is toggled.
+
 ## [0.1.1] - 2026-08-13
 
 - Hid the Dock icon after the settings window closes while keeping MacEase available in the menu bar.
@@ -14,4 +21,5 @@ All notable changes to MacEase are documented here. The project follows [Semanti
 - Added a menu bar interface with English and Simplified Chinese localization.
 
 [0.1.0]: https://github.com/lkpsg/MacEase/releases/tag/v0.1.0
-[0.1.1]: https://github.com/lkpsg/MacEase/compare/v0.1.0...HEAD
+[0.1.1]: https://github.com/lkpsg/MacEase/compare/v0.1.0...1018cb2
+[0.2.0]: https://github.com/lkpsg/MacEase/compare/1018cb2...HEAD

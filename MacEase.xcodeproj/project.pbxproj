@@ -18,9 +18,11 @@
 		4951141C4A2010E1F4CFFA4B /* libMacEaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F20D98548D07D0188BF9CB /* libMacEaseCore.a */; };
 		55DBDC6A34CDFDE7332C2159 /* MenuBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */; };
 		7D9F33F0A1E78187DCBDB56E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */; };
+		84114D7BB2413859C3C81594 /* ScrollDirectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F943D0B6AAE5E2957CE436D2 /* ScrollDirectionController.swift */; };
 		85370585F0952CC50B6A341A /* CreationKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DD3241F7CC1E1DC09A5DD /* CreationKind.swift */; };
 		96543ACB2904A1D056EFAF60 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DD8CA6C32C4B776B1603AA94 /* Localizable.strings */; };
 		99CB57C8BA7FC7733EEE1E89 /* FileCreationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */; };
+		AFE52B179CD10C3FE6EA8D56 /* ScrollDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D3B42C3E90F48705E2E92A /* ScrollDirection.swift */; };
 		B7A1ED3CB4CCF12A6948FCA0 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 300B359D40E8D806AEC05048 /* AppIcon.icns */; };
 		C1AFF8EB32F2AD2619D8B2C5 /* MacEaseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */; };
 		C371C2F6FE145C849895EB99 /* MenuBarIconTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = E51BA4C85E3EF0FA96E384AB /* MenuBarIconTemplate.png */; };
@@ -83,6 +85,7 @@
 		4B20D8CDA603BA8BF57F2F03 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4D7588A8070CD80832F5595E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		69841E8DAA9A980CA798D974 /* MacEaseFinderExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MacEaseFinderExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		73D3B42C3E90F48705E2E92A /* ScrollDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDirection.swift; sourceTree = "<group>"; };
 		7507A4F45FB6AE30D9063AF5 /* FinderSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSync.swift; sourceTree = "<group>"; };
 		800DD3241F7CC1E1DC09A5DD /* CreationKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationKind.swift; sourceTree = "<group>"; };
 		81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEaseApp.swift; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 		EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCreationService.swift; sourceTree = "<group>"; };
 		F1FF1BD179368091147728AC /* MacEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7F62DF0C30E806FA34F310B /* CreationRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationRequestHandler.swift; sourceTree = "<group>"; };
+		F943D0B6AAE5E2957CE436D2 /* ScrollDirectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDirectionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,7 @@
 				49CC110AAA3FE00AC841A2A6 /* CreationRequest.swift */,
 				30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */,
 				EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */,
+				73D3B42C3E90F48705E2E92A /* ScrollDirection.swift */,
 				45305D9D11FFDE7781D71454 /* TargetDirectoryResolver.swift */,
 			);
 			path = MacEaseCore;
@@ -179,6 +184,7 @@
 				C379CB75E1A3FF48ED3610E6 /* FinderRenameController.swift */,
 				81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */,
 				41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */,
+				F943D0B6AAE5E2957CE436D2 /* ScrollDirectionController.swift */,
 				87C1CB229661DE62B7E6B3A3 /* Resources */,
 			);
 			path = MacEaseApp;
@@ -374,6 +380,7 @@
 				18D691EBC0A39DFC03B73641 /* CreationRequest.swift in Sources */,
 				99CB57C8BA7FC7733EEE1E89 /* FileCreationError.swift in Sources */,
 				3585F67B480EA7DAB19B8D54 /* FileCreationService.swift in Sources */,
+				AFE52B179CD10C3FE6EA8D56 /* ScrollDirection.swift in Sources */,
 				2F70238D926DB5DE8DA7DA98 /* TargetDirectoryResolver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +395,7 @@
 				EEDA62257FCD2AEA90D4610A /* FinderRenameController.swift in Sources */,
 				C1AFF8EB32F2AD2619D8B2C5 /* MacEaseApp.swift in Sources */,
 				55DBDC6A34CDFDE7332C2159 /* MenuBarContentView.swift in Sources */,
+				84114D7BB2413859C3C81594 /* ScrollDirectionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

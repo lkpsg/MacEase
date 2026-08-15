@@ -1,0 +1,3 @@
+// Keep the designated requirement stable across local debug ad-hoc builds.
+// Release builds signed with an Apple identity use the identity's requirement.
+designated => identifier "com.lkpsg.MacEase"

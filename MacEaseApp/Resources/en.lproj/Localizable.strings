@@ -5,10 +5,20 @@
 "settings.finderExtensionRequired" = "Finder extension needs to be enabled";
 "settings.manageFinderExtension" = "Manage Finder Extension…";
 "settings.enableFinderExtension" = "Enable Finder Extension…";
-"settings.renameEnabled" = "In-place Finder renaming is enabled";
-"settings.renamePermissionRequired" = "Accessibility access is required to start renaming automatically";
-"settings.allow" = "Allow…";
-"settings.firstUseHint" = "On first use, enable “MacEase Finder Extension” in the System Settings window that opens.";
+"settings.accessibilityEnabled" = "Accessibility access is enabled";
+"settings.accessibilityPermissionRequired" = "Accessibility access is required for in-place renaming and scroll direction control";
+"settings.openAccessibilitySettings" = "Open System Settings…";
+"settings.firstUseHint" = "On first use, enable the Finder extension and allow Accessibility access in System Settings.";
+"settings.scrollDirectionTitle" = "Scroll direction";
+"settings.scrollDirectionDescription" = "Choose natural or reversed scrolling independently for the trackpad and mouse wheel.";
+"settings.enableScrollDirection" = "Control scroll direction";
+"settings.trackpad" = "Trackpad";
+"settings.mouseWheel" = "Mouse wheel";
+"settings.scrollNatural" = "Natural";
+"settings.scrollReversed" = "Reversed";
+"settings.scrollModeHint" = "Natural moves content with the gesture; Reversed moves it in the opposite direction.";
+"settings.scrollActive" = "Scroll direction control is active";
+"settings.scrollPermissionHint" = "macOS has not granted access to this MacEase process. If MacEase is already enabled in System Settings, remove the old entry, add /Applications/MacEase.app again, and reopen the app.";
 
 "menu.running" = "MacEase is running";
 "menu.openSettings" = "Open Settings…";
@@ -16,6 +26,7 @@
 "menu.manageFinderExtension" = "Manage Finder Extension…";
 "menu.enableFinderExtension" = "Enable Finder Extension…";
 "menu.allowFinderRename" = "Allow In-place Finder Renaming…";
+"menu.scrollDirection" = "Scroll Direction Control";
 "menu.quit" = "Quit MacEase";
 
 "creation.error.log" = "Unable to create %@: %@";

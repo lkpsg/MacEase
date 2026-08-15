@@ -10,6 +10,7 @@ MacEase 为 macOS 增加轻量、原生的便捷功能，并常驻菜单栏。
 - 在 Finder 右键菜单中创建文件夹。
 - 创建项目后直接在 Finder 中原地重命名。
 - 关闭窗口后继续常驻菜单栏且不占用 Dock。
+- 分别为触摸板和鼠标滚轮设置自然滚动或反向滚动。
 - 根据 macOS 语言设置使用英文或简体中文。
 
 ## 系统要求
@@ -22,7 +23,7 @@ MacEase 为 macOS 增加轻量、原生的便捷功能，并常驻菜单栏。
 1. 从[最新版本](https://github.com/lkpsg/MacEase/releases/latest)下载 `MacEase-vX.Y.Z-arm64.dmg`。
 2. 打开 DMG，将 `MacEase.app` 拖入“应用程序”。
 3. 首次启动时按住 Control 点击 MacEase，然后选择“打开”。
-4. 在 MacEase 中启用 Finder 扩展，并授予辅助功能权限以自动进入原地重命名。
+4. 在 MacEase 中启用 Finder 扩展，并授予辅助功能权限以使用原地命名和滚动方向控制。
 
 当前下载版本使用临时签名，尚未经过 Apple 公证。
 

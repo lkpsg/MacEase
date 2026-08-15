@@ -5,6 +5,8 @@ import SwiftUI
 struct MenuBarContentView: View {
     @State private var finderExtensionIsEnabled = false
     @State private var accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
+    @AppStorage(ScrollDirectionPreferences.isEnabledKey)
+    private var scrollDirectionIsEnabled = false
 
     var body: some View {
         Group {
@@ -59,6 +61,16 @@ struct MenuBarContentView: View {
 
             Divider()
 
+            Toggle(
+                AppLocalization.string(
+                    "menu.scrollDirection",
+                    fallback: "Scroll Direction Control"
+                ),
+                isOn: $scrollDirectionIsEnabled
+            )
+
+            Divider()
+
             Button(AppLocalization.string(
                 "menu.quit",
                 fallback: "Quit MacEase"
@@ -69,6 +81,10 @@ struct MenuBarContentView: View {
         .onAppear {
             refreshFinderExtensionStatus()
             accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
+            ScrollDirectionController.shared.reloadPreferences()
+        }
+        .onChange(of: scrollDirectionIsEnabled) { _ in
+            ScrollDirectionController.shared.reloadPreferences()
         }
     }
 
