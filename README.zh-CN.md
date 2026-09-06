@@ -13,6 +13,7 @@ MacEase 为 macOS 增加轻量、原生的便捷功能，并常驻菜单栏。
 - 分别为触摸板和鼠标滚轮设置自然滚动或反向滚动。
 - 使用 Command + 数字打开或切换到 Dock 中对应的固定应用。
 - 根据 macOS 语言设置使用英文或简体中文。
+- 按功能分组的侧边栏设置界面，可调整窗口大小并记住上次访问的页面。
 
 ## 系统要求
 
@@ -24,9 +25,15 @@ MacEase 为 macOS 增加轻量、原生的便捷功能，并常驻菜单栏。
 1. 从[最新版本](https://github.com/lkpsg/MacEase/releases/latest)下载 `MacEase-vX.Y.Z-arm64.dmg`。
 2. 打开 DMG，将 `MacEase.app` 拖入“应用程序”。
 3. 首次启动时按住 Control 点击 MacEase，然后选择“打开”。
-4. 在 MacEase 中启用 Finder 扩展，并授予辅助功能权限以使用原地命名和滚动方向控制。
+4. 在 MacEase 的“权限与扩展”中启用 Finder 扩展，并授予辅助功能权限以使用原地命名和滚动方向控制。
 
 当前下载版本使用临时签名，尚未经过 Apple 公证。
+
+## 设置
+
+在左侧选择 Finder、滚动方向或 Dock 应用快捷键，右侧只显示对应功能的设置。详细说明默认折叠，缺少权限或快捷键冲突时才会显示提示。“权限与扩展”集中管理系统授权，“关于 MacEase”显示版本信息。
+
+窗口会记住上次访问的页面、大小和位置。菜单栏提供滚动方向和 Dock 快捷键的快速开关，以及打开设置和退出入口。
 
 ## Dock 应用快捷键
 
@@ -68,7 +75,7 @@ cd MacEase
 MacEase 遵循[语义化版本](https://semver.org/lang/zh-CN/)，当前版本号和构建号统一保存在 `Config/Version.xcconfig`。
 
 ```bash
-./scripts/set-version.sh 0.3.0
+./scripts/set-version.sh 0.3.1
 ./scripts/check-version.sh
 ```
 

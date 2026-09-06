@@ -15,6 +15,18 @@ fi
 
 "$project_root/scripts/build-debug-app.sh" "$output_root"
 
+if pgrep -x MacEase >/dev/null; then
+    osascript -e 'tell application "MacEase" to quit' >/dev/null
+    for attempt in 1 2 3 4 5 6 7 8 9 10; do
+        if ! pgrep -x MacEase >/dev/null; then break; fi
+        sleep 0.2
+    done
+    if pgrep -x MacEase >/dev/null; then
+        echo "MacEase 尚未退出，请关闭应用后重试安装。" >&2
+        exit 1
+    fi
+fi
+
 ditto "$built_app" "$installed_app"
 codesign --verify --deep --strict --verbose=2 "$installed_app"
 

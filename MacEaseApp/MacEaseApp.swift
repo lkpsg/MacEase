@@ -107,25 +107,33 @@ enum SettingsWindowPresenter {
         application.activate(ignoringOtherApps: true)
 
         if windowController == nil {
-            let contentSize = NSSize(width: 560, height: 700)
+            let contentSize = NSSize(width: 780, height: 560)
             let hostingView = NSHostingView(rootView: ContentView())
             hostingView.frame = NSRect(origin: .zero, size: contentSize)
             hostingView.autoresizingMask = [.width, .height]
 
             let window = NSWindow(
                 contentRect: NSRect(origin: .zero, size: contentSize),
-                styleMask: [.titled, .closable, .miniaturizable],
+                styleMask: [.titled, .closable, .miniaturizable, .resizable],
                 backing: .buffered,
                 defer: false
             )
             window.title = "MacEase"
             window.contentView = hostingView
-            window.contentMinSize = contentSize
-            window.contentMaxSize = contentSize
+            window.contentMinSize = NSSize(width: 700, height: 480)
             window.isReleasedWhenClosed = false
-            window.setFrameAutosaveName("MacEaseSettingsWindow")
-            window.center()
-            windowController = SettingsWindowController(window: window)
+            // Start the sidebar layout at its new default size, then preserve
+            // the user's size and position across future launches.
+            let frameName = "MacEaseSettingsWindowV2"
+            let controller = SettingsWindowController(window: window)
+            // NSWindowController applies its own autosave name to the window
+            // during initialization, so configure the controller first.
+            controller.windowFrameAutosaveName = frameName
+            controller.shouldCascadeWindows = false
+            if !window.setFrameUsingName(frameName) {
+                window.center()
+            }
+            windowController = controller
         }
 
         guard let window = windowController?.window else { return }
@@ -149,6 +157,21 @@ private final class SettingsWindowController: NSWindowController, NSWindowDelega
     }
 
     func windowWillClose(_ notification: Notification) {
+        saveFrame()
         NSApplication.shared.setActivationPolicy(.accessory)
+    }
+
+    func windowDidResize(_ notification: Notification) {
+        saveFrame()
+    }
+
+    func windowDidMove(_ notification: Notification) {
+        saveFrame()
+    }
+
+    private func saveFrame() {
+        guard let window, !window.frameAutosaveName.isEmpty else { return }
+        // Keep frame changes made through both mouse and accessibility APIs.
+        window.saveFrame(usingName: window.frameAutosaveName)
     }
 }

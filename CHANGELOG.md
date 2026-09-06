@@ -2,6 +2,14 @@
 
 All notable changes to MacEase are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [0.3.1] - 2026-09-06
+
+- Replaced the long settings page with sidebar navigation and dedicated Finder, scrolling, Dock shortcut, permissions, and about pages.
+- Made the settings window resizable and restored its last page, size, and position.
+- Collapsed detailed help, preserved disabled feature options, and showed permission or shortcut warnings only when relevant.
+- Simplified the menu bar to quick feature toggles, Open Settings, and Quit.
+- Made local installation wait for the previous app process to exit before replacing and relaunching it.
+
 ## [0.3.0] - 2026-09-06
 
 - Added Command + 1–9 and 0 shortcuts to launch or activate the first ten pinned Dock apps.
@@ -30,4 +38,5 @@ All notable changes to MacEase are documented here. The project follows [Semanti
 [0.1.0]: https://github.com/lkpsg/MacEase/releases/tag/v0.1.0
 [0.1.1]: https://github.com/lkpsg/MacEase/compare/v0.1.0...1018cb2
 [0.2.0]: https://github.com/lkpsg/MacEase/compare/1018cb2...82e80d9
-[0.3.0]: https://github.com/lkpsg/MacEase/compare/82e80d9...HEAD
+[0.3.0]: https://github.com/lkpsg/MacEase/compare/82e80d9...e11f50e
+[0.3.1]: https://github.com/lkpsg/MacEase/compare/e11f50e...HEAD
