@@ -11,6 +11,7 @@ MacEase adds small, native conveniences to macOS and stays available from the me
 - Rename a newly created item in place in Finder.
 - Keep MacEase in the menu bar without occupying the Dock after its window closes.
 - Set natural or reversed scrolling independently for the trackpad and mouse wheel.
+- Open or switch to pinned Dock apps with Command + number shortcuts.
 - Use MacEase in English or Simplified Chinese according to the macOS language setting.
 
 ## Requirements
@@ -27,6 +28,14 @@ MacEase adds small, native conveniences to macOS and stays available from the me
 
 The downloadable build is ad-hoc signed and is not Apple-notarized yet.
 
+## Dock app shortcuts
+
+Enable **Dock App Shortcuts** in settings or the menu bar. `⌘1`–`⌘9` open or switch to the first nine pinned Dock apps, and `⌘0` opens the tenth. Numbering starts after Finder by default; enable **Count Finder as the first app** to include it. Settings show the current app assigned to each shortcut.
+
+Assignments update automatically when pinned apps are moved, added or removed. Recent apps, folders and spacers do not count. This feature needs no Accessibility access and is off by default. When enabled, assigned shortcuts take priority over the current app’s Command + number actions. Unassigned numbers remain available; turning the feature off releases all shortcuts.
+
+If a shortcut is unavailable, quit Snap or another utility using it. MacEase retries automatically.
+
 ## Build from source
 
 Install Xcode Command Line Tools and XcodeGen, then run:
@@ -40,6 +49,14 @@ cd MacEase
 ./scripts/install-debug-app.sh
 ```
 
+To run the system hotkey integration tests, use a logged-in macOS desktop and quit MacEase, Snap and other utilities that reserve these shortcuts:
+
+```bash
+./scripts/test-dock-shortcuts.sh
+# Also exercise real keyboard event delivery; requires event-posting permission:
+./scripts/test-dock-shortcuts.sh --post-key-events
+```
+
 To build a distributable DMG locally:
 
 ```bash
@@ -51,7 +68,7 @@ To build a distributable DMG locally:
 MacEase follows [Semantic Versioning](https://semver.org/), with the current version and build number stored in `Config/Version.xcconfig`.
 
 ```bash
-./scripts/set-version.sh 0.2.0
+./scripts/set-version.sh 0.3.0
 ./scripts/check-version.sh
 ```
 

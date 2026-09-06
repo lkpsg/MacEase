@@ -41,3 +41,15 @@
 "core.error.targetIsNotDirectory" = "目标位置不是文件夹。";
 "core.error.itemAlreadyExists" = "“%@” 已经存在。";
 "core.error.unableToCreate" = "无法创建项目，请检查文件夹权限后重试。";
+
+"settings.dockShortcutsTitle" = "Dock 应用快捷键";
+"settings.dockShortcutsDescription" = "使用 Command + 1–9 和 0，按 Dock 顺序打开或切换到前十个固定应用。0 对应第十个应用。";
+"settings.enableDockShortcuts" = "启用 Dock 应用快捷键";
+"settings.dockIncludeFinder" = "将 Finder 计为第一个应用（⌘1）";
+"settings.dockShortcutsHint" = "快捷键自动跟随 Dock 顺序变化，跳过最近使用的应用、文件夹和分隔符。启用后优先于当前应用的 Command + 数字操作，无需辅助功能权限。";
+"settings.dockShortcutUnavailable" = "不可用";
+"settings.dockShortcutsConflict" = "部分快捷键无法注册。请退出 Snap 或其他使用相同快捷键的应用，MacEase 会自动重试。";
+"settings.dockShortcutsEmpty" = "将应用固定到 Dock 后，即可分配快捷键。";
+"settings.dockShortcutsActive" = "Dock 应用快捷键已生效";
+"settings.dockLaunchError" = "无法打开应用：";
+"menu.dockShortcuts" = "Dock 应用快捷键";

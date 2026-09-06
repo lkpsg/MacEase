@@ -7,6 +7,8 @@ struct MenuBarContentView: View {
     @State private var accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
     @AppStorage(ScrollDirectionPreferences.isEnabledKey)
     private var scrollDirectionIsEnabled = false
+    @AppStorage(DockShortcutPreferences.isEnabledKey)
+    private var dockShortcutsIsEnabled = false
 
     var body: some View {
         Group {
@@ -69,6 +71,11 @@ struct MenuBarContentView: View {
                 isOn: $scrollDirectionIsEnabled
             )
 
+            Toggle(
+                AppLocalization.string("menu.dockShortcuts", fallback: "Dock App Shortcuts"),
+                isOn: $dockShortcutsIsEnabled
+            )
+
             Divider()
 
             Button(AppLocalization.string(
@@ -82,9 +89,13 @@ struct MenuBarContentView: View {
             refreshFinderExtensionStatus()
             accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
             ScrollDirectionController.shared.reloadPreferences()
+            DockShortcutController.shared.reloadPreferences()
         }
         .onChange(of: scrollDirectionIsEnabled) { _ in
             ScrollDirectionController.shared.reloadPreferences()
+        }
+        .onChange(of: dockShortcutsIsEnabled) { _ in
+            DockShortcutController.shared.reloadPreferences()
         }
     }
 

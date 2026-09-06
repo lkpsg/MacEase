@@ -11,6 +11,7 @@ MacEase 为 macOS 增加轻量、原生的便捷功能，并常驻菜单栏。
 - 创建项目后直接在 Finder 中原地重命名。
 - 关闭窗口后继续常驻菜单栏且不占用 Dock。
 - 分别为触摸板和鼠标滚轮设置自然滚动或反向滚动。
+- 使用 Command + 数字打开或切换到 Dock 中对应的固定应用。
 - 根据 macOS 语言设置使用英文或简体中文。
 
 ## 系统要求
@@ -27,6 +28,14 @@ MacEase 为 macOS 增加轻量、原生的便捷功能，并常驻菜单栏。
 
 当前下载版本使用临时签名，尚未经过 Apple 公证。
 
+## Dock 应用快捷键
+
+在设置或菜单栏中开启“Dock 应用快捷键”，即可使用 `⌘1`–`⌘9` 打开或切换到 Dock 中前九个固定应用，`⌘0` 对应第十个应用。默认从 Finder 后的第一个固定应用开始编号，也可在设置中勾选“将 Finder 计为第一个应用”。设置中会显示当前快捷键与应用的对应关系。
+
+拖动、添加或移除 Dock 中的固定应用后，映射会自动更新；最近使用的应用、文件夹和分隔符不参与编号。功能无需辅助功能权限，默认关闭。开启后，这些快捷键会优先于当前应用的同名快捷键；没有对应应用的数字不占用，关闭功能即释放快捷键。
+
+如果设置显示快捷键不可用，请退出 Snap 等占用相同快捷键的应用，MacEase 会自动重试。
+
 ## 从源码构建
 
 安装 Xcode Command Line Tools 和 XcodeGen，然后运行：
@@ -40,6 +49,14 @@ cd MacEase
 ./scripts/install-debug-app.sh
 ```
 
+在已登录的 macOS 桌面上退出 MacEase、Snap 等快捷键工具后，可运行系统快捷键集成测试：
+
+```bash
+./scripts/test-dock-shortcuts.sh
+# 同时测试真实键盘事件投递，需要终端具备事件投递权限：
+./scripts/test-dock-shortcuts.sh --post-key-events
+```
+
 在本地构建可分发的 DMG：
 
 ```bash
@@ -51,7 +68,7 @@ cd MacEase
 MacEase 遵循[语义化版本](https://semver.org/lang/zh-CN/)，当前版本号和构建号统一保存在 `Config/Version.xcconfig`。
 
 ```bash
-./scripts/set-version.sh 0.2.0
+./scripts/set-version.sh 0.3.0
 ./scripts/check-version.sh
 ```
 

@@ -41,3 +41,15 @@
 "core.error.targetIsNotDirectory" = "The destination is not a folder.";
 "core.error.itemAlreadyExists" = "“%@” already exists.";
 "core.error.unableToCreate" = "The item could not be created. Check the folder permissions and try again.";
+
+"settings.dockShortcutsTitle" = "Dock app shortcuts";
+"settings.dockShortcutsDescription" = "Use Command + 1–9 and 0 to open or switch to the first ten pinned apps in Dock order. 0 opens the tenth app.";
+"settings.enableDockShortcuts" = "Enable Dock app shortcuts";
+"settings.dockIncludeFinder" = "Count Finder as the first app (⌘1)";
+"settings.dockShortcutsHint" = "Shortcuts follow Dock changes automatically. Recent apps, folders and spacers are skipped. These shortcuts take priority over the current app’s Command + number actions. No Accessibility access is needed.";
+"settings.dockShortcutUnavailable" = "Unavailable";
+"settings.dockShortcutsConflict" = "Some shortcuts could not be registered. Quit Snap or another app using the same shortcuts; MacEase retries automatically.";
+"settings.dockShortcutsEmpty" = "Pin an app to the Dock to assign a shortcut.";
+"settings.dockShortcutsActive" = "Dock app shortcuts are active";
+"settings.dockLaunchError" = "Unable to open app: ";
+"menu.dockShortcuts" = "Dock App Shortcuts";

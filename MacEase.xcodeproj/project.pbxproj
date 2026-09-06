@@ -14,9 +14,11 @@
 		2F70238D926DB5DE8DA7DA98 /* TargetDirectoryResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45305D9D11FFDE7781D71454 /* TargetDirectoryResolver.swift */; };
 		33C9E7B0D5F3FB5B61FD0DB1 /* FinderSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7507A4F45FB6AE30D9063AF5 /* FinderSync.swift */; };
 		3585F67B480EA7DAB19B8D54 /* FileCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */; };
+		4402FDCA2DFE900390CE7323 /* DockShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37374AF6551C2579F8D7D87D /* DockShortcut.swift */; };
 		464E48D99ECB61444622A3B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E270094C3FDB28FDF3FC3C77 /* InfoPlist.strings */; };
 		4951141C4A2010E1F4CFFA4B /* libMacEaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F20D98548D07D0188BF9CB /* libMacEaseCore.a */; };
 		55DBDC6A34CDFDE7332C2159 /* MenuBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */; };
+		7098C6D54CA6ACC54B1F1558 /* DockShortcutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2629CB137D4DDFF24712AF2 /* DockShortcutController.swift */; };
 		7D9F33F0A1E78187DCBDB56E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */; };
 		84114D7BB2413859C3C81594 /* ScrollDirectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F943D0B6AAE5E2957CE436D2 /* ScrollDirectionController.swift */; };
 		85370585F0952CC50B6A341A /* CreationKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800DD3241F7CC1E1DC09A5DD /* CreationKind.swift */; };
@@ -78,6 +80,7 @@
 		30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCreationError.swift; sourceTree = "<group>"; };
 		300B359D40E8D806AEC05048 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
 		31F20D98548D07D0188BF9CB /* libMacEaseCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMacEaseCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		37374AF6551C2579F8D7D87D /* DockShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockShortcut.swift; sourceTree = "<group>"; };
 		41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContentView.swift; sourceTree = "<group>"; };
 		45305D9D11FFDE7781D71454 /* TargetDirectoryResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetDirectoryResolver.swift; sourceTree = "<group>"; };
 		491C5E56AB5E479A46928967 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 		8CD21A8453A9068CC9AD44AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AD54615E93DCA9FC722C886 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ADBB93053EE8A76D987C5D91 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C2629CB137D4DDFF24712AF2 /* DockShortcutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockShortcutController.swift; sourceTree = "<group>"; };
 		C379CB75E1A3FF48ED3610E6 /* FinderRenameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderRenameController.swift; sourceTree = "<group>"; };
 		C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D09023CE4770D8A587EED62D /* AppLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalization.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 			children = (
 				800DD3241F7CC1E1DC09A5DD /* CreationKind.swift */,
 				49CC110AAA3FE00AC841A2A6 /* CreationRequest.swift */,
+				37374AF6551C2579F8D7D87D /* DockShortcut.swift */,
 				30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */,
 				EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */,
 				73D3B42C3E90F48705E2E92A /* ScrollDirection.swift */,
@@ -181,6 +186,7 @@
 				1BED8B21D542564E8BFA19BE /* Assets.xcassets */,
 				C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */,
 				F7F62DF0C30E806FA34F310B /* CreationRequestHandler.swift */,
+				C2629CB137D4DDFF24712AF2 /* DockShortcutController.swift */,
 				C379CB75E1A3FF48ED3610E6 /* FinderRenameController.swift */,
 				81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */,
 				41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */,
@@ -378,6 +384,7 @@
 			files = (
 				85370585F0952CC50B6A341A /* CreationKind.swift in Sources */,
 				18D691EBC0A39DFC03B73641 /* CreationRequest.swift in Sources */,
+				4402FDCA2DFE900390CE7323 /* DockShortcut.swift in Sources */,
 				99CB57C8BA7FC7733EEE1E89 /* FileCreationError.swift in Sources */,
 				3585F67B480EA7DAB19B8D54 /* FileCreationService.swift in Sources */,
 				AFE52B179CD10C3FE6EA8D56 /* ScrollDirection.swift in Sources */,
@@ -392,6 +399,7 @@
 				0074A0583CC619BFE021BC30 /* AppLocalization.swift in Sources */,
 				7D9F33F0A1E78187DCBDB56E /* ContentView.swift in Sources */,
 				E8BD5687E9D20C0410FF7F79 /* CreationRequestHandler.swift in Sources */,
+				7098C6D54CA6ACC54B1F1558 /* DockShortcutController.swift in Sources */,
 				EEDA62257FCD2AEA90D4610A /* FinderRenameController.swift in Sources */,
 				C1AFF8EB32F2AD2619D8B2C5 /* MacEaseApp.swift in Sources */,
 				55DBDC6A34CDFDE7332C2159 /* MenuBarContentView.swift in Sources */,

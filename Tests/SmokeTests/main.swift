@@ -31,6 +31,12 @@ enum SmokeTests {
         try run("离散滚动事件识别为鼠标滚轮", testDiscreteScrollInput)
         try run("自然滚动方向决策", testNaturalScrollDecision)
         try run("反向滚动方向决策", testReversedScrollDecision)
+        try run("Dock 仅按顺序读取固定应用", testDockApplicationParsing)
+        try run("Dock 支持可选 Finder 编号且不重复", testDockFinder)
+        try run("Dock 支持中文、空格和旧式路径", testDockPaths)
+        try run("Dock 忽略非法项目及重复应用", testInvalidDockTiles)
+        try run("Dock 前十个应用映射到 1–9 和 0", testDockShortcutNumbers)
+        try run("Dock 重排和移除更新快捷键", testDockReordering)
 
         print("\n✅ MacEaseCore 冒烟测试通过：\(passed)/\(passed)")
     }
@@ -214,6 +220,79 @@ enum SmokeTests {
             ),
             "系统已是反向滚动时不应再次反转"
         )
+    }
+
+    private static func dockTile(_ path: String, name: String? = nil, type: String = "file-tile") -> [String: Any] {
+        var data: [String: Any] = ["file-data": ["_CFURLString": path]]
+        if let name { data["file-label"] = name }
+        return ["tile-type": type, "tile-data": data]
+    }
+
+    private static func testDockApplicationParsing() throws {
+        let apps = DockApplicationParser.applications(from: [
+            dockTile("file:///Applications/Safari.app/", name: "Safari"),
+            dockTile("file:///Applications/Spacer.app", type: "spacer-tile"),
+            dockTile("file:///Users/test/Downloads/"),
+            dockTile("file:///Applications/Mail.app/", name: "Mail"),
+        ])
+        try expect(apps.map(\.name) == ["Safari", "Mail"], "Dock 应用顺序或过滤不正确")
+        try expect(apps[0].url.path == "/Applications/Safari.app", "应用路径不正确")
+    }
+
+    private static func testDockFinder() throws {
+        let tiles = [
+            dockTile("file:///System/Library/CoreServices/Finder.app/", name: "Finder"),
+            dockTile("file:///Applications/Mail.app/", name: "Mail"),
+        ]
+        try expect(DockApplicationParser.applications(from: tiles).map(\.name) == ["Mail"], "默认应跳过 Finder")
+        let apps = DockApplicationParser.applications(from: tiles, includesFinder: true)
+        try expect(apps.map(\.name) == ["Finder", "Mail"], "Finder 应只在首位出现一次")
+    }
+
+    private static func testDockPaths() throws {
+        let path = "/Applications/测试 App #1.app"
+        let apps = DockApplicationParser.applications(from: [
+            dockTile(URL(fileURLWithPath: path).absoluteString),
+            dockTile("/Applications/Legacy App.app", name: "  "),
+        ])
+        try expect(apps.map(\.name) == ["测试 App #1", "Legacy App"], "缺少名称时未从路径读取名称")
+        try expect(apps.first?.url.path == path, "编码后的 URL 解析失败")
+    }
+
+    private static func testInvalidDockTiles() throws {
+        let apps = DockApplicationParser.applications(from: [
+            [:], ["tile-type": "file-tile"],
+            dockTile("https://example.com/Remote.app"),
+            dockTile("file://remote/Applications/Remote.app"),
+            dockTile("Relative.app"),
+            dockTile(""),
+            dockTile("file:///Applications/Mail.app/"),
+            dockTile("file:///Applications/Mail.app"),
+        ])
+        try expect(apps.map(\.name) == ["Mail"], "非法或重复项目未被忽略")
+    }
+
+    private static func testDockShortcutNumbers() throws {
+        let apps = (1...12).map {
+            DockApplication(url: URL(fileURLWithPath: "/Applications/App\($0).app"), name: "App\($0)")
+        }
+        let shortcuts = DockShortcut.make(applications: apps)
+        try expect(shortcuts.count == 10, "只能为前十个应用分配数字快捷键")
+        try expect(shortcuts.map(\.digit) == [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], "数字顺序错误")
+        try expect(shortcuts.map(\.keyCode) == [18, 19, 20, 21, 23, 22, 26, 28, 25, 29], "物理按键映射错误")
+        try expect(shortcuts.last?.application.name == "App10", "⌘0 应映射到第十个应用")
+        try expect(DockShortcut.make(applications: []).isEmpty, "空 Dock 不应注册快捷键")
+    }
+
+    private static func testDockReordering() throws {
+        let first = dockTile("file:///Applications/First.app")
+        let second = dockTile("file:///Applications/Second.app")
+        let before = DockShortcut.make(applications: DockApplicationParser.applications(from: [first, second]))
+        let after = DockShortcut.make(applications: DockApplicationParser.applications(from: [second, first]))
+        let removed = DockShortcut.make(applications: DockApplicationParser.applications(from: [second]))
+        try expect(before[0].application.name == "First", "初始映射错误")
+        try expect(after[0].application.name == "Second", "重排未生效")
+        try expect(removed.count == 1 && removed[0].digit == 1, "移除应用后映射错误")
     }
 
     private static func expect(_ condition: @autoclosure () throws -> Bool, _ message: String) throws {

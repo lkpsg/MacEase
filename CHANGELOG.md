@@ -2,6 +2,13 @@
 
 All notable changes to MacEase are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-09-06
+
+- Added Command + 1–9 and 0 shortcuts to launch or activate the first ten pinned Dock apps.
+- Added optional Finder numbering, automatic Dock order updates, and a settings list of app assignments.
+- Added settings and menu bar toggles, shortcut conflict reporting, and automatic retry when conflicts clear.
+- Added Dock parsing and system hotkey integration tests, including real keyboard event delivery.
+
 ## [0.2.0] - 2026-08-15
 
 - Added independent natural or reversed scrolling for trackpads and mouse wheels.
@@ -22,4 +29,5 @@ All notable changes to MacEase are documented here. The project follows [Semanti
 
 [0.1.0]: https://github.com/lkpsg/MacEase/releases/tag/v0.1.0
 [0.1.1]: https://github.com/lkpsg/MacEase/compare/v0.1.0...1018cb2
-[0.2.0]: https://github.com/lkpsg/MacEase/compare/1018cb2...HEAD
+[0.2.0]: https://github.com/lkpsg/MacEase/compare/1018cb2...82e80d9
+[0.3.0]: https://github.com/lkpsg/MacEase/compare/82e80d9...HEAD

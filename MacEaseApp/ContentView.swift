@@ -7,6 +7,11 @@ struct ContentView: View {
     @State private var extensionIsEnabled = false
     @State private var accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
     @State private var scrollDirectionIsRunning = false
+    @ObservedObject private var dockShortcutController = DockShortcutController.shared
+    @AppStorage(DockShortcutPreferences.isEnabledKey)
+    private var dockShortcutsIsEnabled = false
+    @AppStorage(DockShortcutPreferences.includesFinderKey)
+    private var dockShortcutsIncludeFinder = false
     @AppStorage(ScrollDirectionPreferences.isEnabledKey)
     private var scrollDirectionIsEnabled = false
     @AppStorage(ScrollDirectionPreferences.trackpadModeKey)
@@ -40,6 +45,10 @@ struct ContentView: View {
                 Divider()
 
                 scrollDirectionSection
+
+                Divider()
+
+                dockShortcutsSection
             }
             .padding(32)
         }
@@ -58,6 +67,12 @@ struct ContentView: View {
         }
         .onChange(of: mouseMode) { _ in
             reloadScrollDirectionController()
+        }
+        .onChange(of: dockShortcutsIsEnabled) { _ in
+            dockShortcutController.reloadPreferences()
+        }
+        .onChange(of: dockShortcutsIncludeFinder) { _ in
+            dockShortcutController.reloadPreferences()
         }
     }
 
@@ -214,6 +229,88 @@ struct ContentView: View {
         }
     }
 
+    private var dockShortcutsSection: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Label(
+                AppLocalization.string("settings.dockShortcutsTitle", fallback: "Dock app shortcuts"),
+                systemImage: "command"
+            )
+            .font(.headline)
+
+            Text(AppLocalization.string(
+                "settings.dockShortcutsDescription",
+                fallback: "Use Command + 1–9 and 0 to open or switch to the first ten pinned apps in Dock order. 0 opens the tenth app."
+            ))
+            .foregroundStyle(.secondary)
+            .fixedSize(horizontal: false, vertical: true)
+
+            Toggle(
+                AppLocalization.string("settings.enableDockShortcuts", fallback: "Enable Dock app shortcuts"),
+                isOn: $dockShortcutsIsEnabled
+            )
+            .toggleStyle(.switch)
+
+            if dockShortcutsIsEnabled {
+                Toggle(
+                    AppLocalization.string("settings.dockIncludeFinder", fallback: "Count Finder as the first app (⌘1)"),
+                    isOn: $dockShortcutsIncludeFinder
+                )
+
+                Text(AppLocalization.string(
+                    "settings.dockShortcutsHint",
+                    fallback: "Shortcuts follow Dock changes automatically. Recent apps, folders and spacers are skipped. These shortcuts take priority over the current app’s Command + number actions. No Accessibility access is needed."
+                ))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+                ForEach(dockShortcutController.shortcuts) { shortcut in
+                    HStack(spacing: 10) {
+                        Text(shortcut.label)
+                            .font(.system(.body, design: .monospaced).weight(.medium))
+                            .frame(width: 36, alignment: .leading)
+                        Image(nsImage: NSWorkspace.shared.icon(forFile: shortcut.application.url.path))
+                            .resizable()
+                            .frame(width: 22, height: 22)
+                        Text(shortcut.application.name)
+                            .lineLimit(1)
+                        Spacer()
+                        if dockShortcutController.unavailablePositions.contains(shortcut.position) {
+                            Text(AppLocalization.string("settings.dockShortcutUnavailable", fallback: "Unavailable"))
+                                .font(.caption)
+                                .foregroundStyle(.orange)
+                        }
+                    }
+                }
+
+                if dockShortcutController.failedToStart || !dockShortcutController.unavailablePositions.isEmpty {
+                    Text(AppLocalization.string(
+                        "settings.dockShortcutsConflict",
+                        fallback: "Some shortcuts could not be registered. Quit Snap or another app using the same shortcuts; MacEase retries automatically."
+                    ))
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+                } else if dockShortcutController.shortcuts.isEmpty {
+                    Text(AppLocalization.string("settings.dockShortcutsEmpty", fallback: "Pin an app to the Dock to assign a shortcut."))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                } else {
+                    Label(
+                        AppLocalization.string("settings.dockShortcutsActive", fallback: "Dock app shortcuts are active"),
+                        systemImage: "checkmark.circle.fill"
+                    )
+                    .font(.caption)
+                    .foregroundStyle(.green)
+                }
+
+                if let error = dockShortcutController.launchError {
+                    Text(AppLocalization.string("settings.dockLaunchError", fallback: "Unable to open app: ") + error)
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                }
+            }
+        }
+    }
+
     private func directionPicker(
         titleKey: String,
         fallback: String,
@@ -244,6 +341,7 @@ struct ContentView: View {
         refreshFinderExtensionStatus()
         accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
         reloadScrollDirectionController()
+        dockShortcutController.reloadPreferences()
     }
 
     private func applyScrollDirectionPreferences() {
