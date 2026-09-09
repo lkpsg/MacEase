@@ -21,7 +21,7 @@ struct PermissionsSettingsView: View {
                 Divider()
                 permissionRow(
                     title: AppLocalization.string("settings.accessibility", fallback: "Accessibility"),
-                    purpose: AppLocalization.string("settings.accessibilityPurpose", fallback: "For in-place renaming and scroll direction control"),
+                    purpose: AppLocalization.string("settings.accessibilityPurpose", fallback: "For in-place renaming, scroll direction control and keyboard mapping"),
                     isGranted: status.accessibilityIsGranted,
                     action: status.openAccessibilitySettings
                 )

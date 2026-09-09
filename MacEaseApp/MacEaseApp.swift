@@ -45,6 +45,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         ScrollDirectionController.shared.reloadPreferences()
         DockShortcutController.shared.reloadPreferences()
+        KeyboardMappingController.shared.reloadPreferences()
 
         // Finder creation requests launch the app with their URL attached and
         // must stay in the background. A normal Dock/Finder launch has no URL,
@@ -86,10 +87,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidBecomeActive(_ notification: Notification) {
         ScrollDirectionController.shared.reloadPreferences()
         DockShortcutController.shared.reloadPreferences()
+        KeyboardMappingController.shared.reloadPreferences()
     }
 
     func applicationWillTerminate(_ notification: Notification) {
         DockShortcutController.shared.stop()
+        KeyboardMappingController.shared.stop()
     }
 }
 

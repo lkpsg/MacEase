@@ -2,6 +2,13 @@
 
 All notable changes to MacEase are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [0.4.0] - 2026-09-09
+
+- Added optional Command + I/J/K/L mappings to plain up/left/down/right arrows, with key repeat and paired key releases.
+- Added a keyboard mapping settings page, menu bar toggle, Accessibility guidance and English/Simplified Chinese strings.
+- Added keyboard event and native text navigation tests to the standard verification script.
+- Added optional system event integration tests with a separate key-event sender and isolated preferences.
+
 ## [0.3.1] - 2026-09-06
 
 - Replaced the long settings page with sidebar navigation and dedicated Finder, scrolling, Dock shortcut, permissions, and about pages.
@@ -39,4 +46,5 @@ All notable changes to MacEase are documented here. The project follows [Semanti
 [0.1.1]: https://github.com/lkpsg/MacEase/compare/v0.1.0...1018cb2
 [0.2.0]: https://github.com/lkpsg/MacEase/compare/1018cb2...82e80d9
 [0.3.0]: https://github.com/lkpsg/MacEase/compare/82e80d9...e11f50e
-[0.3.1]: https://github.com/lkpsg/MacEase/compare/e11f50e...HEAD
+[0.3.1]: https://github.com/lkpsg/MacEase/compare/e11f50e...6a388a8
+[0.4.0]: https://github.com/lkpsg/MacEase/compare/6a388a8...v0.4.0

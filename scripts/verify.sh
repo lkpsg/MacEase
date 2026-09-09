@@ -55,4 +55,7 @@ echo "==> Building and running file-system smoke tests"
 swift build -Xswiftc -gnone
 .build/arm64-apple-macosx/debug/MacEaseCoreSmokeTests
 
+echo "==> Testing keyboard mapping and native text navigation"
+./scripts/test-keyboard-mapping.sh
+
 echo "==> Verification complete"

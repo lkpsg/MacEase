@@ -6,6 +6,8 @@ struct MenuBarContentView: View {
     private var scrollDirectionIsEnabled = false
     @AppStorage(DockShortcutPreferences.isEnabledKey)
     private var dockShortcutsIsEnabled = false
+    @AppStorage(KeyboardMappingPreferences.isEnabledKey)
+    private var keyboardMappingIsEnabled = false
 
     var body: some View {
         Group {
@@ -16,6 +18,10 @@ struct MenuBarContentView: View {
             Toggle(
                 AppLocalization.string("menu.dockShortcuts", fallback: "Dock App Shortcuts"),
                 isOn: $dockShortcutsIsEnabled
+            )
+            Toggle(
+                AppLocalization.string("menu.keyboardMapping", fallback: "Keyboard Mapping"),
+                isOn: $keyboardMappingIsEnabled
             )
 
             Divider()
@@ -33,12 +39,16 @@ struct MenuBarContentView: View {
         .onAppear {
             ScrollDirectionController.shared.reloadPreferences()
             DockShortcutController.shared.reloadPreferences()
+            KeyboardMappingController.shared.reloadPreferences()
         }
         .onChange(of: scrollDirectionIsEnabled) { _ in
             ScrollDirectionController.shared.reloadPreferences()
         }
         .onChange(of: dockShortcutsIsEnabled) { _ in
             DockShortcutController.shared.reloadPreferences()
+        }
+        .onChange(of: keyboardMappingIsEnabled) { _ in
+            KeyboardMappingController.shared.reloadPreferences()
         }
     }
 }

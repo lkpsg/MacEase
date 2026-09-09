@@ -2,7 +2,7 @@ import AppKit
 import SwiftUI
 
 enum SettingsPage: String, CaseIterable, Identifiable {
-    case finder, scroll, dock, permissions, about
+    case finder, scroll, dock, keyboard, permissions, about
 
     var id: String { rawValue }
 
@@ -11,6 +11,7 @@ enum SettingsPage: String, CaseIterable, Identifiable {
         case .finder: "Finder"
         case .scroll: AppLocalization.string("settings.scrollDirectionTitle", fallback: "Scroll direction")
         case .dock: AppLocalization.string("settings.dockShortcutsTitle", fallback: "Dock app shortcuts")
+        case .keyboard: AppLocalization.string("settings.keyboardMappingTitle", fallback: "Keyboard mapping")
         case .permissions: AppLocalization.string("settings.permissionsTitle", fallback: "Permissions & Extensions")
         case .about: AppLocalization.string("settings.aboutTitle", fallback: "About MacEase")
         }
@@ -21,6 +22,7 @@ enum SettingsPage: String, CaseIterable, Identifiable {
         case .finder: "folder.badge.plus"
         case .scroll: "computermouse"
         case .dock: "command"
+        case .keyboard: "keyboard"
         case .permissions: "lock.shield"
         case .about: "info.circle"
         }
@@ -42,6 +44,7 @@ struct ContentView: View {
     @AppStorage(ScrollDirectionPreferences.mouseModeKey) private var mouseMode = "reversed"
     @AppStorage(DockShortcutPreferences.isEnabledKey) private var dockEnabled = false
     @AppStorage(DockShortcutPreferences.includesFinderKey) private var includesFinder = false
+    @AppStorage(KeyboardMappingPreferences.isEnabledKey) private var keyboardEnabled = false
 
     private var selectedPage: SettingsPage {
         SettingsPage(rawValue: selectedPageName) ?? .finder
@@ -59,7 +62,7 @@ struct ContentView: View {
             VStack(alignment: .leading, spacing: 0) {
                 List(selection: selection) {
                     Section(AppLocalization.string("settings.featuresGroup", fallback: "Features")) {
-                        ForEach([SettingsPage.finder, .scroll, .dock]) { page in
+                        ForEach([SettingsPage.finder, .scroll, .dock, .keyboard]) { page in
                             sidebarRow(page)
                         }
                     }
@@ -107,6 +110,7 @@ struct ContentView: View {
         .onChange(of: mouseMode) { _ in status.reloadScrollDirection() }
         .onChange(of: dockEnabled) { _ in dockController.reloadPreferences() }
         .onChange(of: includesFinder) { _ in dockController.reloadPreferences() }
+        .onChange(of: keyboardEnabled) { _ in status.reloadKeyboardMapping() }
     }
 
     private func sidebarRow(_ page: SettingsPage) -> some View {
@@ -134,6 +138,8 @@ struct ContentView: View {
             dockEnabled && (dockController.failedToStart
                 || !dockController.unavailablePositions.isEmpty
                 || dockController.launchError != nil)
+        case .keyboard:
+            keyboardEnabled && !status.keyboardMappingIsRunning
         case .about:
             false
         }
@@ -148,6 +154,8 @@ struct ContentView: View {
             ScrollSettingsView(status: status, openPermissions: openPermissions)
         case .dock:
             DockSettingsView()
+        case .keyboard:
+            KeyboardSettingsView(status: status, openPermissions: openPermissions)
         case .permissions:
             PermissionsSettingsView(status: status)
         case .about:

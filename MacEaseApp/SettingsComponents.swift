@@ -7,10 +7,12 @@ final class SettingsStatus: ObservableObject {
     @Published private(set) var extensionIsEnabled: Bool?
     @Published private(set) var accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
     @Published private(set) var scrollDirectionIsRunning = false
+    @Published private(set) var keyboardMappingIsRunning = false
 
     func refresh() {
         accessibilityIsGranted = FinderRenameController().isAccessibilityGranted
         reloadScrollDirection()
+        reloadKeyboardMapping()
         DockShortcutController.shared.reloadPreferences()
         Task {
             extensionIsEnabled = await Task.detached {
@@ -21,6 +23,10 @@ final class SettingsStatus: ObservableObject {
 
     func reloadScrollDirection() {
         scrollDirectionIsRunning = ScrollDirectionController.shared.reloadPreferences()
+    }
+
+    func reloadKeyboardMapping() {
+        keyboardMappingIsRunning = KeyboardMappingController.shared.reloadPreferences()
     }
 
     func openAccessibilitySettings() {

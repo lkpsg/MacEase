@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0074A0583CC619BFE021BC30 /* AppLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09023CE4770D8A587EED62D /* AppLocalization.swift */; };
 		03B843845374DE10660A0B81 /* AboutSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAB3B2B765425A4A1C3A3E5 /* AboutSettingsView.swift */; };
+		0457E6F891249C274FE362C9 /* KeyboardSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296D3315C8BBC82DB606071 /* KeyboardSettingsView.swift */; };
+		04F335DCCDCB7A2BFCAF951D /* KeyboardMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00179669B62ADD895C6DC0A6 /* KeyboardMapping.swift */; };
 		04F99796FD66C11FF5254626 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7FE29B0015E2DB6D3EE66F7 /* Localizable.strings */; };
 		18D691EBC0A39DFC03B73641 /* CreationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CC110AAA3FE00AC841A2A6 /* CreationRequest.swift */; };
 		1E6549AFC0F128DFF9515526 /* libMacEaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F20D98548D07D0188BF9CB /* libMacEaseCore.a */; };
@@ -18,6 +20,7 @@
 		4402FDCA2DFE900390CE7323 /* DockShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37374AF6551C2579F8D7D87D /* DockShortcut.swift */; };
 		464E48D99ECB61444622A3B4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E270094C3FDB28FDF3FC3C77 /* InfoPlist.strings */; };
 		4951141C4A2010E1F4CFFA4B /* libMacEaseCore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31F20D98548D07D0188BF9CB /* libMacEaseCore.a */; };
+		4E61443003A121CA6DF5FAFE /* KeyboardMappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E7C899F7555E8E0E0C5AC0 /* KeyboardMappingController.swift */; };
 		55DBDC6A34CDFDE7332C2159 /* MenuBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */; };
 		7098C6D54CA6ACC54B1F1558 /* DockShortcutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2629CB137D4DDFF24712AF2 /* DockShortcutController.swift */; };
 		72D7ED892860506FC6A5A372 /* ScrollSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8379E33A9F7F7038AD5DB5 /* ScrollSettingsView.swift */; };
@@ -38,6 +41,7 @@
 		EC1043BEFAD39400283E20B8 /* PermissionsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29639844867C257893E91A07 /* PermissionsSettingsView.swift */; };
 		EEDA62257FCD2AEA90D4610A /* FinderRenameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C379CB75E1A3FF48ED3610E6 /* FinderRenameController.swift */; };
 		F33D70629AEF387F31A062BB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9FAFDCCA60E24BE3BD5DE72C /* InfoPlist.strings */; };
+		FD26B7FC8761A6BF4614C2BE /* KeyboardEventMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9378BC120653FA9BC48EBF7D /* KeyboardEventMapper.swift */; };
 		FF3F7840ECC4DE7601C005A5 /* MacEaseFinderExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 69841E8DAA9A980CA798D974 /* MacEaseFinderExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -80,6 +84,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00179669B62ADD895C6DC0A6 /* KeyboardMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMapping.swift; sourceTree = "<group>"; };
 		0C3F5FC90C1054678A9BC0F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		0CAB3B2B765425A4A1C3A3E5 /* AboutSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutSettingsView.swift; sourceTree = "<group>"; };
 		1BED8B21D542564E8BFA19BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -104,6 +109,7 @@
 		81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacEaseApp.swift; sourceTree = "<group>"; };
 		8CD21A8453A9068CC9AD44AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D8379E33A9F7F7038AD5DB5 /* ScrollSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollSettingsView.swift; sourceTree = "<group>"; };
+		9378BC120653FA9BC48EBF7D /* KeyboardEventMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventMapper.swift; sourceTree = "<group>"; };
 		9AD54615E93DCA9FC722C886 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ADBB93053EE8A76D987C5D91 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		BD9B8E2D09C337C1FAD0C49D /* FinderSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderSettingsView.swift; sourceTree = "<group>"; };
@@ -111,7 +117,9 @@
 		C379CB75E1A3FF48ED3610E6 /* FinderRenameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderRenameController.swift; sourceTree = "<group>"; };
 		C4EB5AA0C0BB52F4093D05E5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D09023CE4770D8A587EED62D /* AppLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalization.swift; sourceTree = "<group>"; };
+		E296D3315C8BBC82DB606071 /* KeyboardSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsView.swift; sourceTree = "<group>"; };
 		E51BA4C85E3EF0FA96E384AB /* MenuBarIconTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuBarIconTemplate.png; sourceTree = "<group>"; };
+		E5E7C899F7555E8E0E0C5AC0 /* KeyboardMappingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMappingController.swift; sourceTree = "<group>"; };
 		E7250181619E62F0EE7CD349 /* Version.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Version.xcconfig; sourceTree = "<group>"; };
 		EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCreationService.swift; sourceTree = "<group>"; };
 		F1FF1BD179368091147728AC /* MacEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +174,7 @@
 				37374AF6551C2579F8D7D87D /* DockShortcut.swift */,
 				30098D2E6A9D3CAF0D17C21E /* FileCreationError.swift */,
 				EBEED9FBEA6B942059F8A614 /* FileCreationService.swift */,
+				00179669B62ADD895C6DC0A6 /* KeyboardMapping.swift */,
 				73D3B42C3E90F48705E2E92A /* ScrollDirection.swift */,
 				45305D9D11FFDE7781D71454 /* TargetDirectoryResolver.swift */,
 			);
@@ -203,6 +212,9 @@
 				C2629CB137D4DDFF24712AF2 /* DockShortcutController.swift */,
 				C379CB75E1A3FF48ED3610E6 /* FinderRenameController.swift */,
 				BD9B8E2D09C337C1FAD0C49D /* FinderSettingsView.swift */,
+				9378BC120653FA9BC48EBF7D /* KeyboardEventMapper.swift */,
+				E5E7C899F7555E8E0E0C5AC0 /* KeyboardMappingController.swift */,
+				E296D3315C8BBC82DB606071 /* KeyboardSettingsView.swift */,
 				81F37561FBBA9AD2CF2BF023 /* MacEaseApp.swift */,
 				41229F5ED79BECEA2D2CF0CA /* MenuBarContentView.swift */,
 				29639844867C257893E91A07 /* PermissionsSettingsView.swift */,
@@ -405,6 +417,7 @@
 				4402FDCA2DFE900390CE7323 /* DockShortcut.swift in Sources */,
 				99CB57C8BA7FC7733EEE1E89 /* FileCreationError.swift in Sources */,
 				3585F67B480EA7DAB19B8D54 /* FileCreationService.swift in Sources */,
+				04F335DCCDCB7A2BFCAF951D /* KeyboardMapping.swift in Sources */,
 				AFE52B179CD10C3FE6EA8D56 /* ScrollDirection.swift in Sources */,
 				2F70238D926DB5DE8DA7DA98 /* TargetDirectoryResolver.swift in Sources */,
 			);
@@ -422,6 +435,9 @@
 				7098C6D54CA6ACC54B1F1558 /* DockShortcutController.swift in Sources */,
 				EEDA62257FCD2AEA90D4610A /* FinderRenameController.swift in Sources */,
 				9FDC025A25294A5A690F8648 /* FinderSettingsView.swift in Sources */,
+				FD26B7FC8761A6BF4614C2BE /* KeyboardEventMapper.swift in Sources */,
+				4E61443003A121CA6DF5FAFE /* KeyboardMappingController.swift in Sources */,
+				0457E6F891249C274FE362C9 /* KeyboardSettingsView.swift in Sources */,
 				C1AFF8EB32F2AD2619D8B2C5 /* MacEaseApp.swift in Sources */,
 				55DBDC6A34CDFDE7332C2159 /* MenuBarContentView.swift in Sources */,
 				EC1043BEFAD39400283E20B8 /* PermissionsSettingsView.swift in Sources */,

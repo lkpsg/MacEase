@@ -58,7 +58,7 @@
 "settings.finderExtension" = "Finder extension";
 "settings.finderExtensionPurpose" = "For Finder context-menu actions";
 "settings.accessibility" = "Accessibility";
-"settings.accessibilityPurpose" = "For in-place renaming and scroll direction control";
+"settings.accessibilityPurpose" = "For in-place renaming, scroll direction control and keyboard mapping";
 "settings.dockNoPermission" = "Dock app shortcuts do not need Accessibility access.";
 "settings.permissionTroubleshooting" = "Permission troubleshooting";
 "settings.permissionGranted" = "Enabled";
@@ -68,3 +68,15 @@
 "settings.permissionManage" = "Manage…";
 "settings.sourceCode" = "Source code";
 "settings.permissionsNavigation" = "Permissions";
+"settings.keyboardMappingTitle" = "Keyboard mapping";
+"settings.keyboardMappingDescription" = "Use Command + I/J/K/L as the up, left, down and right arrow keys.";
+"settings.enableKeyboardMapping" = "Enable keyboard mapping";
+"settings.keyboardUnavailable" = "Keyboard mapping could not start.";
+"settings.keyboardNeedsPermission" = "Accessibility access is needed to map keyboard shortcuts.";
+"settings.keyboard.up" = "Up";
+"settings.keyboard.left" = "Left";
+"settings.keyboard.down" = "Down";
+"settings.keyboard.right" = "Right";
+"settings.keyboardHelp" = "Mapping rules";
+"settings.keyboardMappingHint" = "Uses the physical I/J/K/L keys with Command only. Hold to repeat. Shortcuts with Shift, Option, Control or Fn keep their original behavior. While enabled, these four shortcuts replace the current app’s actions; turn this feature off to restore them.";
+"menu.keyboardMapping" = "Keyboard Mapping";

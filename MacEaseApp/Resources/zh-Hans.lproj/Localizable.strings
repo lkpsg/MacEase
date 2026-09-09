@@ -58,7 +58,7 @@
 "settings.finderExtension" = "Finder 扩展";
 "settings.finderExtensionPurpose" = "用于 Finder 右键创建";
 "settings.accessibility" = "辅助功能";
-"settings.accessibilityPurpose" = "用于原地重命名和滚动方向控制";
+"settings.accessibilityPurpose" = "用于原地重命名、滚动方向控制和键盘映射";
 "settings.dockNoPermission" = "Dock 快捷键无需辅助功能权限。";
 "settings.permissionTroubleshooting" = "权限问题排查";
 "settings.permissionGranted" = "已启用";
@@ -68,3 +68,15 @@
 "settings.permissionManage" = "管理…";
 "settings.sourceCode" = "源代码";
 "settings.permissionsNavigation" = "权限与扩展";
+"settings.keyboardMappingTitle" = "键盘映射";
+"settings.keyboardMappingDescription" = "将 Command + I/J/K/L 映射为上、左、下、右方向键。";
+"settings.enableKeyboardMapping" = "启用键盘映射";
+"settings.keyboardUnavailable" = "键盘映射未能启动。";
+"settings.keyboardNeedsPermission" = "需要辅助功能权限才能使用键盘映射。";
+"settings.keyboard.up" = "上";
+"settings.keyboard.left" = "左";
+"settings.keyboard.down" = "下";
+"settings.keyboard.right" = "右";
+"settings.keyboardHelp" = "映射的使用规则";
+"settings.keyboardMappingHint" = "使用键盘上 I/J/K/L 的物理位置，仅搭配 Command 时生效，长按可连续移动。同时按下 Shift、Option、Control 或 Fn 的快捷键保持原有行为。开启后，这四个快捷键会替代当前应用的同名操作，关闭功能后恢复。";
+"menu.keyboardMapping" = "键盘映射";
