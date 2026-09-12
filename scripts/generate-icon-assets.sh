@@ -3,18 +3,20 @@
 set -eu
 
 project_root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-master_icon="$project_root/Design/MacEase-AppIcon.svg"
+master_svg="$project_root/Design/MacEase-AppIcon.svg"
 master_png="$project_root/Design/MacEase-AppIcon-Master.png"
+menu_svg="$project_root/Design/MacEase-MenuBarIcon.svg"
 menu_master="$project_root/Design/MacEase-MenuBarIcon-Master.png"
 app_icon_set="$project_root/MacEaseApp/Assets.xcassets/AppIcon.appiconset"
 menu_icon_set="$project_root/MacEaseApp/Assets.xcassets/MenuBarIcon.imageset"
 runtime_icon="$project_root/MacEaseApp/Resources/AppIcon.icns"
 runtime_menu_icon="$project_root/MacEaseApp/Resources/MenuBarIconTemplate.png"
 python_runtime=${CODEX_WORKSPACE_PYTHON:-$(command -v python3 || true)}
-iconset_dir=$(mktemp -d /tmp/macease-iconset.XXXXXX)/AppIcon.iconset
+temporary_root=$(mktemp -d /tmp/macease-iconset.XXXXXX)
+iconset_dir="$temporary_root/AppIcon.iconset"
 
 cleanup() {
-    rm -r "$(dirname "$iconset_dir")"
+    rm -r "$temporary_root"
 }
 trap cleanup EXIT
 
@@ -22,127 +24,68 @@ if [ -z "$python_runtime" ] || [ ! -x "$python_runtime" ]; then
     echo "错误：找不到 Python 3。" >&2
     exit 1
 fi
+for utility in sips iconutil; do
+    if ! command -v "$utility" >/dev/null 2>&1; then
+        echo "错误：找不到 $utility，无法生成图标。" >&2
+        exit 1
+    fi
+done
 
-if ! "$python_runtime" -c 'import PIL' >/dev/null 2>&1; then
-    echo "错误：图标生成需要 Pillow；请先执行 python3 -m pip install Pillow。" >&2
-    exit 1
-fi
-
-if ! command -v sips >/dev/null 2>&1; then
-    echo "错误：找不到 sips，无法渲染 SVG 图标。" >&2
-    exit 1
-fi
-
-mkdir -p "$iconset_dir"
-
-sips -s format png "$master_icon" --out "$master_png" >/dev/null
-
-"$python_runtime" - "$master_png" "$menu_master" "$app_icon_set" "$menu_icon_set" \
-    "$runtime_menu_icon" "$iconset_dir" <<'PY'
-from pathlib import Path
+# Derive the template from the same vector mark, preserving its silhouette.
+# Only XML is processed here; artwork pixels are never mirrored or recoloured.
+"$python_runtime" - "$master_svg" "$menu_svg" <<'PY'
+import copy
 import sys
-from PIL import Image, ImageDraw
+import xml.etree.ElementTree as ET
 
-master_path = Path(sys.argv[1])
-menu_master = Path(sys.argv[2])
-app_icon_set = Path(sys.argv[3])
-menu_icon_set = Path(sys.argv[4])
-runtime_menu_icon = Path(sys.argv[5])
-iconset_dir = Path(sys.argv[6])
-
-master = Image.open(master_path).convert("RGBA")
-if master.width != master.height:
-    raise SystemExit("App icon master must be square")
-
-# Core Graphics can introduce one-level channel differences on mirrored SVG
-# edges.  Normalise those pixels so the exported icon is exactly centred and
-# keep the translucent outer edge in the background colour instead of grey.
-pixels = master.load()
-for y in range(master.height):
-    for x in range(master.width // 2):
-        opposite_x = master.width - x - 1
-        left = pixels[x, y]
-        right = pixels[opposite_x, y]
-        mirrored = tuple((left[channel] + right[channel] + 1) // 2 for channel in range(4))
-        pixels[x, y] = mirrored
-        pixels[opposite_x, y] = mirrored
-
-background_colour = (245, 241, 232)
-
-def normalise_translucent_edge(image: Image.Image) -> None:
-    image_pixels = image.load()
-    for image_y in range(image.height):
-        for image_x in range(image.width):
-            alpha = image_pixels[image_x, image_y][3]
-            if 0 < alpha < 255:
-                image_pixels[image_x, image_y] = (*background_colour, alpha)
-
-for y in range(master.height // 2):
-    opposite_y = master.height - y - 1
-    for x in range(master.width):
-        top_alpha = pixels[x, y][3]
-        bottom_alpha = pixels[x, opposite_y][3]
-        mirrored_alpha = (top_alpha + bottom_alpha + 1) // 2
-        pixels[x, y] = (*pixels[x, y][:3], mirrored_alpha)
-        pixels[x, opposite_y] = (*pixels[x, opposite_y][:3], mirrored_alpha)
-
-normalise_translucent_edge(master)
-
-master.save(master_path, optimize=True)
-
-resampling = Image.Resampling.LANCZOS
-app_sizes = {
-    "icon_16x16.png": 16,
-    "icon_16x16@2x.png": 32,
-    "icon_32x32.png": 32,
-    "icon_32x32@2x.png": 64,
-    "icon_128x128.png": 128,
-    "icon_128x128@2x.png": 256,
-    "icon_256x256.png": 256,
-    "icon_256x256@2x.png": 512,
-    "icon_512x512.png": 512,
-    "icon_512x512@2x.png": 1024,
-}
-for filename, size in app_sizes.items():
-    resized = master.resize((size, size), resampling)
-    normalise_translucent_edge(resized)
-    resized.save(app_icon_set / filename, optimize=True)
-    resized.save(iconset_dir / filename, optimize=True)
-
-def draw_menu_icon(pixel_size: int) -> Image.Image:
-    supersampling = 8
-    canvas_size = pixel_size * supersampling
-    scale = canvas_size / 18
-    image = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
-    draw = ImageDraw.Draw(image)
-    ink = (0, 0, 0, 255)
-
-    def point(x: float, y: float) -> tuple[int, int]:
-        return round(x * scale), round(y * scale)
-
-    # Monochrome reduction of the app mark.  The orange diamond is omitted in
-    # template mode, where macOS supplies the menu-bar foreground colour.
-    draw.polygon([
-        point(2.4, 2.8),
-        point(5.2, 2.8),
-        point(9.0, 9.3),
-        point(12.8, 2.8),
-        point(15.6, 2.8),
-        point(10.4, 11.7),
-        point(7.6, 11.7),
-    ], fill=ink)
-    draw.rectangle([point(5.1, 11.4), point(12.9, 13.2)], fill=ink)
-    draw.rectangle([point(8.0, 13.0), point(10.0, 17.2)], fill=ink)
-
-    return image.resize((pixel_size, pixel_size), Image.Resampling.LANCZOS)
-
-for filename, size in (("MenuBarIcon.png", 18), ("MenuBarIcon@2x.png", 36), ("MenuBarIcon@3x.png", 54)):
-    draw_menu_icon(size).save(menu_icon_set / filename, optimize=True)
-
-draw_menu_icon(36).save(runtime_menu_icon, optimize=True)
-draw_menu_icon(1024).save(menu_master, optimize=True)
+namespace = "http://www.w3.org/2000/svg"
+ET.register_namespace("", namespace)
+source = ET.parse(sys.argv[1]).getroot()
+mark = source.find(".//*[@id='mark']")
+if mark is None or "data-menu-view-box" not in mark.attrib:
+    raise SystemExit("App icon must contain a mark with data-menu-view-box")
+mark = copy.deepcopy(mark)
+view_box = mark.attrib.pop("data-menu-view-box")
+mark.set("fill", "#000000")
+root = ET.Element(f"{{{namespace}}}svg", {
+    "width": "1024", "height": "1024", "viewBox": view_box,
+})
+ET.SubElement(root, f"{{{namespace}}}title").text = "MacEase menu bar icon"
+root.append(mark)
+ET.ElementTree(root).write(sys.argv[2], encoding="unicode")
 PY
 
-iconutil -c icns "$iconset_dir" -o "$runtime_icon"
+sips -s format png "$master_svg" --out "$master_png" >/dev/null
+sips -s format png "$menu_svg" --out "$menu_master" >/dev/null
+mkdir -p "$iconset_dir"
 
-echo "已从 $master_icon 生成 AppIcon 与菜单栏模板图标。"
+while read -r filename size; do
+    if [ "$size" = 1024 ]; then
+        cp "$master_png" "$iconset_dir/$filename"
+    else
+        sips -z "$size" "$size" "$master_png" --out "$iconset_dir/$filename" >/dev/null
+    fi
+    cp "$iconset_dir/$filename" "$app_icon_set/$filename"
+done <<'SIZES'
+icon_16x16.png 16
+icon_16x16@2x.png 32
+icon_32x32.png 32
+icon_32x32@2x.png 64
+icon_128x128.png 128
+icon_128x128@2x.png 256
+icon_256x256.png 256
+icon_256x256@2x.png 512
+icon_512x512.png 512
+icon_512x512@2x.png 1024
+SIZES
+
+while read -r filename size; do
+    sips -z "$size" "$size" "$menu_master" --out "$menu_icon_set/$filename" >/dev/null
+done <<'SIZES'
+MenuBarIcon.png 18
+MenuBarIcon@2x.png 36
+MenuBarIcon@3x.png 54
+SIZES
+cp "$menu_icon_set/MenuBarIcon@2x.png" "$runtime_menu_icon"
+iconutil -c icns "$iconset_dir" -o "$runtime_icon"
+echo "已生成 App 图标和同形状的菜单栏模板图标。"
