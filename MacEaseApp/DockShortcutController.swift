@@ -5,7 +5,6 @@ import MacEaseCore
 
 enum DockShortcutPreferences {
     static let isEnabledKey = "dockShortcutsEnabled"
-    static let includesFinderKey = "dockShortcutsIncludeFinder"
 }
 
 @MainActor
@@ -26,12 +25,12 @@ final class DockShortcutController: ObservableObject {
     // Injectable Dock reader and launcher also let the integration tests use
     // real global key events without changing the user's Dock or opening apps.
     private let defaults: UserDefaults
-    private let readApplications: @MainActor (Bool) -> [DockApplication]
+    private let readApplications: @MainActor () -> [DockApplication]
     private let launchApplication: (@MainActor (URL) -> Void)?
 
     init(
         defaults: UserDefaults = .standard,
-        readApplications: @escaping @MainActor (Bool) -> [DockApplication] = DockShortcutController.readDockApplications,
+        readApplications: @escaping @MainActor () -> [DockApplication] = DockShortcutController.readDockApplications,
         launchApplication: (@MainActor (URL) -> Void)? = nil
     ) {
         self.defaults = defaults
@@ -40,7 +39,7 @@ final class DockShortcutController: ObservableObject {
     }
 
     func reloadPreferences() {
-        let applications = readApplications(defaults.bool(forKey: DockShortcutPreferences.includesFinderKey))
+        let applications = readApplications()
         let updated = DockShortcut.make(applications: applications)
         if shortcuts != updated {
             shortcuts = updated
@@ -112,12 +111,12 @@ final class DockShortcutController: ObservableObject {
         if launchError != nil { launchError = nil }
     }
 
-    static func readDockApplications(includesFinder: Bool) -> [DockApplication] {
+    static func readDockApplications() -> [DockApplication] {
         let domain = "com.apple.dock" as CFString
         CFPreferencesAppSynchronize(domain)
         let tiles = CFPreferencesCopyAppValue("persistent-apps" as CFString, domain)
             as? [[String: Any]] ?? []
-        return DockApplicationParser.applications(from: tiles, includesFinder: includesFinder)
+        return DockApplicationParser.applications(from: tiles)
     }
 
     private func installEventHandler() -> Bool {

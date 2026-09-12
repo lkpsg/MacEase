@@ -34,9 +34,7 @@ enum DockShortcutTests {
         var launched: [URL] = []
         let controller = DockShortcutController(
             defaults: defaults,
-            readApplications: { includeFinder in
-                (includeFinder ? [DockApplication(url: DockApplicationParser.finderURL, name: "Finder")] : []) + apps
-            },
+            readApplications: { apps },
             launchApplication: { launched.append($0) }
         )
         defer { controller.stop() }
@@ -50,7 +48,7 @@ enum DockShortcutTests {
 
         try sendHotKey(1, pressed: true)
         try sendHotKey(1, pressed: true)
-        try expect(launched == [apps[0].url], "Holding a key must launch only once")
+        try expect(launched == [DockApplicationParser.finderURL], "Holding Command + 1 must launch Finder only once")
         try sendHotKey(1, pressed: false)
         try sendHotKey(1, pressed: true)
         try sendHotKey(1, pressed: false)
@@ -58,14 +56,14 @@ enum DockShortcutTests {
         print("✓ Routes hotkey events and suppresses repeats until release")
 
         apps.swapAt(0, 1)
-        try sendHotKey(1, pressed: true)
-        try sendHotKey(1, pressed: false)
+        try sendHotKey(2, pressed: true)
+        try sendHotKey(2, pressed: false)
         try expect(launched.last == apps[0].url, "Must read the Dock again before launching")
         print("✓ Uses a Dock reorder immediately, before the refresh timer")
 
         try sendHotKey(10, pressed: true)
         try sendHotKey(10, pressed: false)
-        try expect(launched.last == apps[9].url, "Command + 0 must open the tenth app")
+        try expect(launched.last == apps[8].url, "Command + 0 must open the ninth app after Finder")
 
         if CommandLine.arguments.contains("--post-key-events") {
             guard CGPreflightPostEventAccess() else {
@@ -74,28 +72,33 @@ enum DockShortcutTests {
             let before = launched.count
             postKey(18, flags: .maskCommand)
             try await Task.sleep(for: .milliseconds(250))
-            try expect(launched.count == before + 1 && launched.last == apps[0].url,
+            try expect(launched.count == before + 1 && launched.last == DockApplicationParser.finderURL,
                        "Posted Command + 1 did not reach the registered global handler")
+            postKey(19, flags: .maskCommand)
+            try await Task.sleep(for: .milliseconds(250))
+            try expect(launched.count == before + 2 && launched.last == apps[0].url,
+                       "Posted Command + 2 did not open the first pinned app after Finder")
             postKey(29, flags: .maskCommand)
             try await Task.sleep(for: .milliseconds(250))
-            try expect(launched.count == before + 2 && launched.last == apps[9].url,
+            try expect(launched.count == before + 3 && launched.last == apps[8].url,
                        "Posted Command + 0 did not reach the registered global handler")
-            print("✓ Actual posted keyboard events reach Command + 1 and Command + 0 handlers")
+            print("✓ Actual posted keyboard events reach Command + 1, Command + 2 and Command + 0 handlers")
         }
 
-        defaults.set(true, forKey: DockShortcutPreferences.includesFinderKey)
-        controller.reloadPreferences()
-        try sendHotKey(1, pressed: true)
-        try sendHotKey(1, pressed: false)
-        try expect(launched.last == DockApplicationParser.finderURL, "Finder preference must shift positions")
-        defaults.set(false, forKey: DockShortcutPreferences.includesFinderKey)
+        for legacyValue in [false, true] {
+            defaults.set(legacyValue, forKey: "dockShortcutsIncludeFinder")
+            controller.reloadPreferences()
+            try sendHotKey(1, pressed: true)
+            try sendHotKey(1, pressed: false)
+            try expect(launched.last == DockApplicationParser.finderURL, "Legacy Finder preference must not change positions")
+        }
 
         apps = Array(apps.prefix(1))
         controller.reloadPreferences()
         var unusedReference: EventHotKeyRef?
-        try expect(registerKey(19, reference: &unusedReference) == noErr, "Removing an app must release Command + 2")
+        try expect(registerKey(20, reference: &unusedReference) == noErr, "Removing an app must release Command + 3")
         if let unusedReference { UnregisterEventHotKey(unusedReference) }
-        print("✓ Finder preference and removed-slot hotkey cleanup")
+        print("✓ Finder stays first regardless of legacy preferences; removed slots release hotkeys")
 
         defaults.set(false, forKey: DockShortcutPreferences.isEnabledKey)
         controller.reloadPreferences()
@@ -120,11 +123,14 @@ enum DockShortcutTests {
 
         apps = []
         controller.reloadPreferences()
-        try expect(controller.shortcuts.isEmpty, "Empty Dock must have no shortcuts")
+        try expect(controller.shortcuts.count == 1, "Empty Dock must retain only Finder")
+        try sendHotKey(1, pressed: true)
+        try sendHotKey(1, pressed: false)
+        try expect(launched.last == DockApplicationParser.finderURL, "Empty Dock must still open Finder with Command + 1")
         var emptyReference: EventHotKeyRef?
-        try expect(registerKey(18, reference: &emptyReference) == noErr, "Empty Dock must release its last key")
+        try expect(registerKey(19, reference: &emptyReference) == noErr, "Empty Dock must release Command + 2")
         if let emptyReference { UnregisterEventHotKey(emptyReference) }
-        print("✓ Empty Dock releases all hotkeys")
+        print("✓ Empty Dock keeps Finder and releases other hotkeys")
     }
 
     private static func sendHotKey(_ position: UInt32, pressed: Bool) throws {

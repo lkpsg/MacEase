@@ -38,7 +38,7 @@ The window remembers its last page, size and position. The menu bar provides qui
 
 ## Dock app shortcuts
 
-Enable **Dock App Shortcuts** in settings or the menu bar. `⌘1`–`⌘9` open or switch to the first nine pinned Dock apps, and `⌘0` opens the tenth. Numbering starts after Finder by default; enable **Count Finder as the first app** to include it. Settings show the current app assigned to each shortcut.
+Enable **Dock App Shortcuts** in settings or the menu bar. `⌘1` always opens or switches to Finder. `⌘2`–`⌘9` and `⌘0` open the next nine pinned Dock apps in order, skipping the system **Apps** launcher. Settings show the current app assigned to each shortcut.
 
 Assignments update automatically when pinned apps are moved, added or removed. Recent apps, folders and spacers do not count. This feature needs no Accessibility access and is off by default. When enabled, assigned shortcuts take priority over the current app’s Command + number actions. Unassigned numbers remain available; turning the feature off releases all shortcuts.
 

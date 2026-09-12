@@ -43,7 +43,6 @@ struct ContentView: View {
     @AppStorage(ScrollDirectionPreferences.trackpadModeKey) private var trackpadMode = "natural"
     @AppStorage(ScrollDirectionPreferences.mouseModeKey) private var mouseMode = "reversed"
     @AppStorage(DockShortcutPreferences.isEnabledKey) private var dockEnabled = false
-    @AppStorage(DockShortcutPreferences.includesFinderKey) private var includesFinder = false
     @AppStorage(KeyboardMappingPreferences.isEnabledKey) private var keyboardEnabled = false
 
     private var selectedPage: SettingsPage {
@@ -109,7 +108,6 @@ struct ContentView: View {
         .onChange(of: trackpadMode) { _ in status.reloadScrollDirection() }
         .onChange(of: mouseMode) { _ in status.reloadScrollDirection() }
         .onChange(of: dockEnabled) { _ in dockController.reloadPreferences() }
-        .onChange(of: includesFinder) { _ in dockController.reloadPreferences() }
         .onChange(of: keyboardEnabled) { _ in status.reloadKeyboardMapping() }
     }
 

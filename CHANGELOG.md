@@ -2,6 +2,11 @@
 
 All notable changes to MacEase are documented here. The project follows [Semantic Versioning](https://semver.org/).
 
+## [0.4.1] - 2026-09-12
+
+- Made Command + 1 always open Finder, with Command + 2 onward following pinned Dock apps while skipping the system Apps launcher.
+- Removed optional Finder numbering and updated shortcut settings and regression tests for the fixed order.
+
 ## [0.4.0] - 2026-09-09
 
 - Added optional Command + I/J/K/L mappings to plain up/left/down/right arrows, with key repeat and paired key releases.
@@ -48,3 +53,4 @@ All notable changes to MacEase are documented here. The project follows [Semanti
 [0.3.0]: https://github.com/lkpsg/MacEase/compare/82e80d9...e11f50e
 [0.3.1]: https://github.com/lkpsg/MacEase/compare/e11f50e...6a388a8
 [0.4.0]: https://github.com/lkpsg/MacEase/compare/6a388a8...v0.4.0
+[0.4.1]: https://github.com/lkpsg/MacEase/compare/v0.4.0...v0.4.1
